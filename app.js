@@ -1,13 +1,24 @@
+const { log } = require("console");
 const express = require("express");
 const fs = require('fs');
 const app = express();
+
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log('Hello from midleware');
+  next();
+})
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+})
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/data/simple.json`));
 
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     length: tours.length,
     data: {
       tours
