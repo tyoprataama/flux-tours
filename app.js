@@ -1,20 +1,20 @@
 const { log } = require("console");
 const express = require("express");
 const fs = require('fs');
+const morgan = require("morgan");
 const app = express();
 
+//////////  1) MIDDLEWARE //////////
 app.use(express.json());
-app.use((req, res, next) => {
-  console.log('Hello from midleware');
-  next();
-})
+app.use(morgan('dev'));
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 })
 
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/data/simple.json`));
 
+//////////  2) ROUTES HANDLERS  //////////
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/data/simple.json`));
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -38,6 +38,7 @@ const getTour = (req, res) => {
   }
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     data: {
       tour
     }
@@ -53,6 +54,7 @@ const postTour = (req, res) => {
   fs.writeFile(`${__dirname}/data/simple.json`, JSON.stringify(tours), err => {
     res.status(201).json({
       status: 'created',
+      requestedAt: req.requestTime,
       data: newTour
     })
   })
@@ -67,6 +69,7 @@ const updateTour = (req, res) => {
   }
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     data: {
       tour: '<Updated data>'
     }
@@ -82,6 +85,7 @@ const deleteTour = (req, res) => {
   }
   res.status(204).json({
     status: 'success',
+    requestedAt: req.requestTime,
     data: null
   })
 }
@@ -93,7 +97,8 @@ const deleteTour = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
-//  ALTERNATE
+//  ALTERNATE 
+////////// 3) ROUTES  //////////
 app.route('/api/v1/tours')
   .get(getAllTours)
   .post(postTour);
@@ -103,6 +108,7 @@ app.route('/api/v1/tours/:id')
   .patch(updateTour)
   .delete(deleteTour);
 
+//////////  4) SERVER //////////
 const port = 3000;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
