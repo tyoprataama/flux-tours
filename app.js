@@ -15,6 +15,7 @@ app.use((req, res, next) => {
 
 //////////  2) ROUTES HANDLERS  //////////
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/data/simple.json`));
+//////////  A) TOURS  //////////
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -90,15 +91,45 @@ const deleteTour = (req, res) => {
   })
 }
 
-//  SAME WAY TO DEFINE HTTP METHOD FROM ROUTE FUNCTION BELOW
-// app.get('/api/v1/tours', getAllTours);
-// app.post('/api/v1/tours', postTour);
-// app.get('/api/v1/tours/:id', getTour);
-// app.patch('/api/v1/tours/:id', updateTour);
-// app.delete('/api/v1/tours/:id', deleteTour);
+//////////  B) USERS  //////////
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    requestedAt: req.requestTime,
+    message: 'This function is not defined yet'
+  })
+}
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    requestedAt: req.requestTime,
+    message: 'This function is not defined yet'
+  })
+}
+const postUsers = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    requestedAt: req.requestTime,
+    message: 'This function is not defined yet'
+  })
+}
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    requestedAt: req.requestTime,
+    message: 'This function is not defined yet'
+  })
+}
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    requestedAt: req.requestTime,
+    message: 'This function is not defined yet'
+  })
+}
 
-//  ALTERNATE 
 ////////// 3) ROUTES  //////////
+////////// A) TOUR  //////////
 app.route('/api/v1/tours')
   .get(getAllTours)
   .post(postTour);
@@ -107,6 +138,16 @@ app.route('/api/v1/tours/:id')
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+////////// B) USERS  //////////
+app.route('/api/v1/users')
+  .get(getAllUsers)
+  .post(postUsers);
+
+app.route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 //////////  4) SERVER //////////
 const port = 3000;
