@@ -1,5 +1,16 @@
 const Tour = require('../models/tourModel');
 
+exports.getGoodPrice = (req, res, next) => {
+  req.query.limit = 5;
+  req.query.sort = '-ratingAverage,price';
+  req.query.fields = 'name,sumary,price,difficulty';
+  next();
+};
+exports.getBestSeller = (req, res, next) => {
+  req.query.sort = '-ratingsQuantity';
+  req.query.limit = 5;
+  next();
+};
 ////////  HANDLERS ////////
 exports.getAllTours = async (req, res) => {
   try {
