@@ -24,7 +24,11 @@ app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
 app.all('*', (req, res, next) => {
-  next(new AppError(`Cannot find ${req.originalUrl} on the server!`, 404));
+  const error = new AppError(
+    `Cannot find ${req.originalUrl} on the server!`,
+    404
+  );
+  next(error);
 });
 
 app.use(globalErrorHandling);
