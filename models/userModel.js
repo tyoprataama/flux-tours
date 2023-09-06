@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A user must have a name'],
     maxlength: [
-      15,
-      'A username name must have less or equal then 15 characters'
+      30,
+      'A username name must have less or equal then 30 characters'
     ],
-    minlength: [3, 'A username name must have more or equal then 3 characters']
+    minlength: [5, 'A username name must have more or equal then 3 characters']
   },
   email: {
     type: String,
@@ -36,6 +37,15 @@ const userSchema = new mongoose.Schema({
       message: 'Confirm your password!'
     }
   }
+});
+
+userSchema.pre('save', async function(next) {
+  //  CHECK IF THE PASSWORD IS MODIFIED OR NOT
+  if (!this.isModified('password')) return next();
+  //  IF MODIFIED THEN HASH THE PASSWORD
+  this.password = await bcrypt.hash(this.password, 12); // 12 IS COST OF THE HASH, MORE HIGH THE VAL, MORE COMPLICATED THE HASH
+  //  SET THE UNDEFINED VAL FOR NOT STORE IN DB, JUST FOR VALIDATION ABOVE
+  this.passwordConfirm = undefined;
 });
 
 const User = mongoose.model('User', userSchema);
