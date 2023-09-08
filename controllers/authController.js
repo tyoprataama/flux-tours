@@ -43,3 +43,18 @@ exports.signIn = catchAsync(async (req, res, next) => {
     token: token
   });
 });
+
+exports.verifyRoutes = catchAsync(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+    console.log('token: ', token);
+  }
+  if (!req.headers.authorization && !token) {
+    return next(new AppError('Please login to your account', 401));
+  }
+  next();
+});
