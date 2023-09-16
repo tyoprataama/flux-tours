@@ -37,7 +37,8 @@ const userSchema = new mongoose.Schema({
       },
       message: 'Confirm your password!'
     }
-  }
+  },
+  passwordChangedAt: Date
 });
 
 userSchema.pre('save', async function(next) {
@@ -51,6 +52,18 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.verifyPassword = async (currPassword, userPassword) => {
   return bcrypt.compare(currPassword, userPassword); // RETURN BOOLEAN
+};
+userSchema.methods.changedPasswordAfter = function(JWTTimeStamps) {
+  // JWTTimeStamps is issued at obj in db user
+  //  CHECK IF USER HAVE PasswordChangeAt then
+  if (this.passwordChangedAt) {
+    const timeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10); // PARSEINT THE DATE AND DEVIDE TO 100 TO MAKE IT EQUAL FROM JWTTimeStamps FORMAT
+    console.log(timeStamp, JWTTimeStamps);
+    //  RETURN THE CHANGE PASSWORD DATE IS GREATER THAN JWT DATE
+    return JWTTimeStamps < timeStamp;
+  }
+  //  IF USER DOESN'T HAVE PasswordChangeAt then RETURN FALSE
+  return false;
 };
 const User = mongoose.model('User', userSchema);
 

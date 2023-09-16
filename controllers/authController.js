@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -14,7 +15,8 @@ exports.signUp = catchAsync(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm
+    passwordConfirm: req.body.passwordConfirm,
+    passwordChangedAt: req.body.passwordChangedAt
   });
   const token = signToken(newUser._id);
   res.status(201).json({
@@ -51,10 +53,27 @@ exports.verifyRoutes = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
-    console.log('token: ', token);
   }
   if (!req.headers.authorization && !token) {
     return next(new AppError('Please login to your account', 401));
   }
+  //  READ THE DOCS JWT
+  const decode = await promisify(jwt.verify)(token, process.env.JWT_KEY);
+
+  const currentUser = await User.findById(decode.id);
+  if (!currentUser) {
+    return next(new AppError('Token in this user does not exist!', 401));
+  }
+  //  CHECK IF USER CHANGE THE PASSWORD THEN RETURN ERROR
+  if (currentUser.changedPasswordAfter(decode.iat)) {
+    return next(
+      new AppError(
+        'The password is changed, please login into your account again!',
+        401
+      )
+    );
+  }
+  req.user = currentUser;
+  //  GRANT USER TO THE PROTECTED ROUTES
   next();
 });
