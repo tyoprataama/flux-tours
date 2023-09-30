@@ -56,6 +56,7 @@ userSchema.pre('save', async function(next) {
   this.password = await bcrypt.hash(this.password, 12); // 12 IS COST OF THE HASH, MORE HIGH THE VAL, MORE COMPLICATED THE HASH
   //  SET THE UNDEFINED VAL FOR NOT STORE IN DB, JUST FOR VALIDATION ABOVE
   this.passwordConfirm = undefined;
+  next();
 });
 
 userSchema.methods.verifyPassword = async (currPassword, userPassword) => {
