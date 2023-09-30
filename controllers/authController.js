@@ -82,8 +82,20 @@ exports.verifyRoutes = catchAsync(async (req, res, next) => {
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return next(new AppError('You do not have permission to this!', 403));
+      return next(new AppError('You do not have permission to do this!', 403));
     }
     next();
   };
 };
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({
+    email: req.body.email
+  });
+  if (!user) {
+    return next(new AppError('User email not found!'), 404);
+  }
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+});
+exports.resetPassword = catchAsync(async (req, res, next) => {});
