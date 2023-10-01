@@ -11,6 +11,14 @@ const signToken = id =>
   jwt.sign({ id }, process.env.JWT_KEY, {
     expiresIn: process.env.JWT_EXPIRES
   });
+const resStatus = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  res.status(statusCode).json({
+    status: 'success',
+    token: token,
+    data: { user }
+  });
+};
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
@@ -21,14 +29,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role
   });
-  const token = signToken(newUser._id);
-  res.status(201).json({
-    status: 'created',
-    token: token,
-    data: {
-      newUser
-    }
-  });
+  resStatus(newUser, 201, res);
 });
 
 exports.signIn = catchAsync(async (req, res, next) => {
@@ -42,11 +43,7 @@ exports.signIn = catchAsync(async (req, res, next) => {
   if (!user || !(await user.verifyPassword(password, user.password))) {
     return next(new AppError('Incorrect password or email'), 401);
   }
-  const token = signToken(user.id);
-  res.status(200).json({
-    status: 'success',
-    token: token
-  });
+  resStatus(user, 200, res);
 });
 
 exports.verifyRoutes = catchAsync(async (req, res, next) => {
@@ -150,11 +147,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetToken = undefined;
   user.passwordResetExp = undefined;
   await user.save();
-  const token = signToken(user.id);
-  res.status(200).json({
-    status: 'success',
-    token: token
-  });
+  resStatus(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -167,9 +160,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
 
   await user.save();
-  const token = signToken(user.id);
-  res.status(200).json({
-    status: 'success',
-    token: token
-  });
+  resStatus(user, 200, res);
 });
