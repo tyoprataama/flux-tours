@@ -156,3 +156,20 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     token: token
   });
 });
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('+password'); // +password is for add the password bcs in userschema the password is not selected
+  if (!(await user.verifyPassword(req.body.currPassword, user.password))) {
+    return next(new AppError('Wrong password!', 401));
+  }
+  //  Update the password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+
+  await user.save();
+  const token = signToken(user.id);
+  res.status(200).json({
+    status: 'success',
+    token: token
+  });
+});
