@@ -15,6 +15,10 @@ router
   .route('/changePassword')
   .patch(authController.verifyRoutes, authController.updatePassword);
 
+router
+  .route('/updateUser')
+  .patch(authController.verifyRoutes, userController.updateUser);
+
 router.route('/').get(userController.getAllUsers);
 
 router
