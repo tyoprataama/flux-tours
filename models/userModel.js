@@ -59,6 +59,12 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+userSchema.pre('save', function(next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  this.passwordChangedAt = Date.now() - 1000; //  1000 means -1seconds bcs when user change password it may took little bit of time
+  next();
+});
+
 userSchema.methods.verifyPassword = async (currPassword, userPassword) => {
   return bcrypt.compare(currPassword, userPassword); // RETURN BOOLEAN
 };
