@@ -18,6 +18,9 @@ router
 router
   .route('/updateUser')
   .patch(authController.verifyRoutes, userController.updateUser);
+router
+  .route('/deleteMe')
+  .delete(authController.verifyRoutes, userController.deleteMe);
 
 router.route('/').get(userController.getAllUsers);
 

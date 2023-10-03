@@ -44,6 +44,11 @@ const userSchema = new mongoose.Schema({
       message: 'Confirm your password!'
     }
   },
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  },
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExp: Date
@@ -62,6 +67,13 @@ userSchema.pre('save', async function(next) {
 userSchema.pre('save', function(next) {
   if (!this.isModified('password') || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000; //  1000 means -1seconds bcs when user change password it may took little bit of time
+  next();
+});
+
+//  This middleware is for executing logic before find() method to get all user
+//  This is for hiding active user shows in body response
+userSchema.pre(/^find/, function(next) {
+  this.find({ active: { $ne: false } }); // ne means not equals
   next();
 });
 
