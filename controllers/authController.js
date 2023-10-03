@@ -21,6 +21,8 @@ const resStatus = (user, statusCode, res) => {
   };
   if (process.env.NODE_ENV === 'production') cookieOpt.secure = true; // Cookie will send with encrypted connections
   res.cookie('jwt', token, cookieOpt);
+  //  Remove the password in the output
+  user.password = undefined;
   res.status(statusCode).json({
     status: 'success',
     token: token,
