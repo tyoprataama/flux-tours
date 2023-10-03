@@ -13,13 +13,14 @@ const signToken = id =>
   });
 const resStatus = (user, statusCode, res) => {
   const token = signToken(user._id);
-  res.cookie('jwt', token, {
+  const cookieOpt = {
     expires: new Date(
       Date.now() + process.env.JWT_EXPIRES_COOKIE * 24 * 60 * 60 * 1000 // Set the cookie expires in format day
     ),
-    secure: true, // Cookie will send with encrypted connections
     httpOnly: true //  Prevent cookie to modified in browser
-  });
+  };
+  if (process.env.NODE_ENV === 'production') cookieOpt.secure = true; // Cookie will send with encrypted connections
+  res.cookie('jwt', token, cookieOpt);
   res.status(statusCode).json({
     status: 'success',
     token: token,
