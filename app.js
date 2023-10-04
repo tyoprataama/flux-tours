@@ -15,25 +15,30 @@ const userRoutes = require('./routes/userRoutes');
 
 console.log(process.env.NODE_ENV);
 //////////   MIDDLEWARE //////////
+
+// Set security HTTP headers
 app.use(helmet());
+
+// Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-app.use(express.json());
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
 
+// Limit requests from same User
 const limiter = rateLimit({
   max: 100, // Set the max amount of request
   windowsMs: 60 * 60 * 1000, // Set to 1 hour
   message: 'Too many request, please try again later!'
 });
-
 app.use('/api', limiter);
+
+// Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+
+// Data sanitization against XSS
 app.use(xssClean());
+
+// Prevent parameter pollution
 app.use(
   hpp({
     whitelist: [
@@ -46,6 +51,15 @@ app.use(
     ]
   })
 );
+
+// Test Middleware
+app.use(express.json());
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
+// Routes
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
