@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
+const hpp = require('hpp');
 
 const app = express();
 
@@ -33,6 +34,18 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 app.use(mongoSanitize());
 app.use(xssClean());
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'ratingsAverage',
+      'price',
+      'maxGroupSize',
+      'difficulty'
+    ]
+  })
+);
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
