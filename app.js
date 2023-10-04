@@ -2,6 +2,8 @@ const express = require('express');
 
 const morgan = require('morgan');
 
+const rateLimit = require('express-rate-limit');
+
 const app = express();
 
 const AppError = require('./utils/appError');
@@ -20,6 +22,13 @@ app.use((req, res, next) => {
   next();
 });
 
+const limiter = rateLimit({
+  max: 100, // Set the max amount of request
+  windowsMs: 60 * 60 * 1000, // Set to 1 hour
+  message: 'Too many request, please try again later!'
+});
+
+app.use('/api', limiter);
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
