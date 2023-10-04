@@ -1,8 +1,7 @@
 const express = require('express');
-
 const morgan = require('morgan');
-
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -13,6 +12,7 @@ const userRoutes = require('./routes/userRoutes');
 
 console.log(process.env.NODE_ENV);
 //////////   MIDDLEWARE //////////
+app.use(helmet());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
