@@ -12,6 +12,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandling = require('./controllers/errorController');
 const tourRoutes = require('./routes/toursRoutes');
 const userRoutes = require('./routes/userRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 console.log(process.env.NODE_ENV);
 //////////   MIDDLEWARE //////////
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/reviews', reviewRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
 app.all('*', (req, res, next) => {
   const error = new AppError(
