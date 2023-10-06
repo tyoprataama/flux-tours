@@ -6,13 +6,13 @@ const AppError = require('../utils/appError');
 exports.getGoodPrice = (req, res, next) => {
   req.query.limit = 5;
   req.query.sort = '-ratingAverage,price';
-  req.query.fields = 'name,sumary,price,difficulty';
+  req.query.fields = 'name,summary,price,difficulty';
   next();
 };
 exports.getBestSeller = (req, res, next) => {
   req.query.sort = '-ratingsQuantity';
   req.query.limit = 5;
-  req.query.fields = 'name,sumary,price,difficulty,ratingsQuantity';
+  req.query.fields = 'name,summary,price,difficulty,ratingsQuantity';
   next();
 };
 
@@ -34,10 +34,7 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 });
 
 exports.getTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findById(req.params.id).populate({
-    path: 'guides',
-    select: '-__v -passwordChangeAt -passwordResetExp -passwordResetToken'
-  });
+  const tour = await Tour.findById(req.params.id);
   if (!tour) {
     return next(
       new AppError('No tour found! please check the ID correctly', 404)
