@@ -106,7 +106,10 @@ const tourSchema = new mongoose.Schema({
 });
 
 tourSchema.pre(/^find/, function(next) {
-  this.populate({ path: 'guides' });
+  this.populate({
+    path: 'guides',
+    select: 'name email role'
+  });
   next();
 });
 const Tour = mongoose.model('Tour', tourSchema);

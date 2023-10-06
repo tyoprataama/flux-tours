@@ -32,8 +32,11 @@ class APIFeatures {
     if (this.queryString.fields) {
       const fields = this.queryString.fields.split(',').join(' ');
       this.query = this.query.select(fields);
-    } else {
-      this.query = this.query.select('-createdAt _id -__v');
+    } else if (this.queryString._fieldsForExec) {
+      const fields = this.query
+        ._fieldsForExec()
+        .filter(f => !['createdAt', '_id', '__v'].includes(f));
+      this.query = this.query.select(fields);
     }
     return this;
   }
