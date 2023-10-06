@@ -23,9 +23,7 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Tour',
     required: [true, 'Review must belong to a tour']
-  },
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
+  }
 });
 
 const Review = mongoose.model('Review', reviewSchema);
