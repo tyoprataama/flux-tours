@@ -29,18 +29,12 @@ exports.getReview = catchAsync(async (req, res, next) => {
     }
   });
 });
-
-exports.createReview = catchAsync(async (req, res, next) => {
+exports.setTourUserId = catchAsync(async (req, res, next) => {
   if (!req.body.tour) req.body.tour = req.params.tourId;
   if (!req.body.user) req.body.user = req.user.id;
-  const newReview = await Review.create(req.body);
-  res.status(201).json({
-    status: 'created',
-    data: {
-      newReview
-    }
-  });
+  next();
 });
+exports.createReview = factoryController.createOne(Review);
 
 exports.updateReview = catchAsync(async (req, res, next) => {
   const review = await Review.findByIdAndUpdate(req.params.id, req.body, {

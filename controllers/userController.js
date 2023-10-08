@@ -29,15 +29,8 @@ exports.getUser = (req, res) => {
     message: 'This function is not defined yet'
   });
 };
-exports.postUsers = catchAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body);
-  res.status(201).json({
-    status: 'created',
-    data: {
-      newUser
-    }
-  });
-});
+exports.postUsers = factoryController.createOne(User);
+
 exports.updateUser = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(new AppError('The password cannot change in this routes'), 400);

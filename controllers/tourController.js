@@ -50,15 +50,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.postTour = catchAsync(async (req, res, next) => {
-  const newTour = await Tour.create(req.body);
-  res.status(201).json({
-    status: 'created',
-    data: {
-      newTour
-    }
-  });
-});
+exports.postTour = factoryController.createOne(Tour);
 
 exports.updateTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {

@@ -14,3 +14,14 @@ exports.deleteOne = Type =>
       data: null
     });
   });
+
+exports.createOne = Type =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Type.create(req.body);
+    res.status(201).json({
+      status: 'created',
+      data: {
+        doc
+      }
+    });
+  });
