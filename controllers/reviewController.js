@@ -1,6 +1,7 @@
 const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const factoryController = require('./factoryController');
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
   let filterObj = {};
@@ -57,13 +58,4 @@ exports.updateReview = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteReview = catchAsync(async (req, res, next) => {
-  const review = await Review.findByIdAndDelete(req.params.id);
-  if (!review) {
-    return next(new AppError('The review is not found!', 404));
-  }
-  res.status(204).json({
-    status: 'deleted!',
-    data: null
-  });
-});
+exports.deleteReview = factoryController.deleteOne(Review);

@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const factoryController = require('./factoryController');
 
 //  Create an object that includes in fields such like email, name from user body
 //  This prevent user to update their role into restricted field such like role admin
@@ -63,10 +64,4 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
   next();
 });
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    requestedAt: req.requestTime,
-    message: 'This function is not defined yet'
-  });
-};
+exports.deleteUser = factoryController.deleteOne(User);
