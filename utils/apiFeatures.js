@@ -35,7 +35,7 @@ class APIFeatures {
     } else if (this.queryString._fieldsForExec) {
       const fields = this.query
         ._fieldsForExec()
-        .filter(f => !['createdAt', '_id', '__v'].includes(f));
+        .filter(f => !['createdAt', '__v'].includes(f));
       this.query = this.query.select(fields);
     }
     return this;
