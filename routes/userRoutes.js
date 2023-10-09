@@ -17,11 +17,7 @@ router
 
 router
   .route('/updateUser')
-  .patch(
-    authController.verifyRoutes,
-    userController.checkUserUpdate,
-    userController.updateUser
-  );
+  .patch(authController.verifyRoutes, userController.updateUser);
 router
   .route('/deleteMe')
   .delete(authController.verifyRoutes, userController.deleteMe);
@@ -31,11 +27,11 @@ router.route('/').get(userController.getAllUsers);
 router
   .route('/:id')
   .get(userController.getUser)
-  // .patch(
-  //   authController.verifyRoutes,
-  //   userController.checkUserUpdate,
-  //   userController.updateUser
-  // )
+  .patch(
+    authController.verifyRoutes,
+    userController.checkUserUpdate,
+    userController.updateUser
+  )
   .delete(userController.deleteUser);
 
 module.exports = router;
