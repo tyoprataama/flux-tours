@@ -15,6 +15,7 @@ router
   );
 router
   .route('/:id')
+  .patch(authController.verifyRoutes, reviewController.updateReview)
   .delete(
     authController.verifyRoutes,
     authController.restrictTo('admin'),

@@ -52,24 +52,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
 
 exports.postTour = factoryController.createOne(Tour);
 
-exports.updateTour = catchAsync(async (req, res, next) => {
-  const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-    //  check the docs about this queries in https://mongoosejs.com/docs/5.x/docs/queries.html
-  });
-  if (!tour) {
-    return next(
-      new AppError('No tour found! please check the ID correctly', 404)
-    );
-  }
-  res.status(200).json({
-    status: 'updated!',
-    data: {
-      tour
-    }
-  });
-});
+exports.updateTour = factoryController.updateOne(Tour);
 
 exports.deleteTour = factoryController.deleteOne(Tour);
 

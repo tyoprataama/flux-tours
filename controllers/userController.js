@@ -31,24 +31,16 @@ exports.getUser = (req, res) => {
 };
 exports.postUsers = factoryController.createOne(User);
 
-exports.updateUser = catchAsync(async (req, res, next) => {
+exports.checkUserUpdate = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
     return next(new AppError('The password cannot change in this routes'), 400);
   }
-  const filteredBody = filterdObj(req.body, 'name', 'email'); // fields declaration for user only can update name and email
-  //  Search user based on id and update it based on input req body
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
-    //  Returns new document which been updated and run validation before save the update
-    new: true,
-    runValidators: true
-  });
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: updatedUser
-    }
-  });
+  req.filteredBody = filterdObj(req.body, 'name', 'email'); // fields declaration for user only can update name and email
+  next();
 });
+
+exports.updateUser = factoryController.updateOne(User);
+
 exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
   res.status(204).json({

@@ -36,20 +36,6 @@ exports.setTourUserId = catchAsync(async (req, res, next) => {
 });
 exports.createReview = factoryController.createOne(Review);
 
-exports.updateReview = catchAsync(async (req, res, next) => {
-  const review = await Review.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
-  if (!review) {
-    return next(new AppError('Ther review is not found!', 404));
-  }
-  res.status(200).json({
-    status: 'updated!',
-    data: {
-      review
-    }
-  });
-});
+exports.updateReview = factoryController.updateOne(Review);
 
 exports.deleteReview = factoryController.deleteOne(Review);
