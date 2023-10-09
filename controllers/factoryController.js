@@ -1,3 +1,4 @@
+const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -46,9 +47,9 @@ exports.updateOne = Type =>
     });
   });
 
-exports.getOne = (Model, populateOpt) =>
+exports.getOne = (Type, populateOpt) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
+    let query = Type.findById(req.params.id);
     if (populateOpt) query = query.populate(populateOpt);
     const doc = await query;
     if (!doc) {
@@ -59,6 +60,26 @@ exports.getOne = (Model, populateOpt) =>
     res.status(200).json({
       status: 'success',
       requestedAt: req.requestTime,
+      data: {
+        doc
+      }
+    });
+  });
+
+exports.getAll = Type =>
+  catchAsync(async (req, res, next) => {
+    // To allow GET nested routes from reviews
+    let filterObj = {};
+    if (req.params.tourId) filterObj = { tour: req.params.tourId };
+    const features = new APIFeatures(Type.find(filterObj), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    const doc = await features.query;
+    res.status(200).json({
+      status: 'success',
+      length: doc.length,
       data: {
         doc
       }

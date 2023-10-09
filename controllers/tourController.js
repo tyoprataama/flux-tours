@@ -18,22 +18,6 @@ exports.getBestSeller = (req, res, next) => {
 };
 
 ////////  HANDLERS ////////
-exports.getAllTours = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-  const tours = await features.query;
-  res.status(200).json({
-    status: 'success',
-    length: tours.length,
-    data: {
-      tours
-    }
-  });
-});
-
 exports.getStatsTour = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
     {
@@ -142,3 +126,4 @@ exports.getTour = factoryController.getOne(Tour, { path: 'reviews' });
 exports.postTour = factoryController.createOne(Tour);
 exports.updateTour = factoryController.updateOne(Tour);
 exports.deleteTour = factoryController.deleteOne(Tour);
+exports.getAllTours = factoryController.getAll(Tour);
