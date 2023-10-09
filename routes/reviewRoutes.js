@@ -15,6 +15,7 @@ router
   );
 router
   .route('/:id')
+  .get(authController.verifyRoutes, reviewController.getReview)
   .patch(authController.verifyRoutes, reviewController.updateReview)
   .delete(
     authController.verifyRoutes,

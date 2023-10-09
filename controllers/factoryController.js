@@ -28,9 +28,6 @@ exports.createOne = Type =>
 
 exports.updateOne = Type =>
   catchAsync(async (req, res, next) => {
-    console.log('ID:', req.params.id); // Check the value of id
-    console.log('Body:', req.body); // Check the value of req.body
-
     const doc = await Type.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -43,6 +40,25 @@ exports.updateOne = Type =>
     }
     res.status(200).json({
       status: 'updated!',
+      data: {
+        doc
+      }
+    });
+  });
+
+exports.getOne = (Model, populateOpt) =>
+  catchAsync(async (req, res, next) => {
+    let query = Model.findById(req.params.id);
+    if (populateOpt) query = query.populate(populateOpt);
+    const doc = await query;
+    if (!doc) {
+      return next(
+        new AppError('No document found! please check the ID correctly', 404)
+      );
+    }
+    res.status(200).json({
+      status: 'success',
+      requestedAt: req.requestTime,
       data: {
         doc
       }

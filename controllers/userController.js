@@ -12,6 +12,15 @@ const filterdObj = (body, ...fields) => {
   });
   return newObj;
 };
+
+exports.checkUserUpdate = catchAsync(async (req, res, next) => {
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(new AppError('The password cannot change in this routes'), 400);
+  }
+  req.filteredBody = filterdObj(req.body, 'name', 'email'); // fields declaration for user only can update name and email
+  next();
+});
+
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const getUser = await User.find();
   res.status(200).json({
@@ -22,31 +31,19 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
     }
   });
 });
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    requestedAt: req.requestTime,
-    message: 'This function is not defined yet'
-  });
-};
-exports.postUsers = factoryController.createOne(User);
-
-exports.checkUserUpdate = catchAsync(async (req, res, next) => {
-  if (req.body.password || req.body.passwordConfirm) {
-    return next(new AppError('The password cannot change in this routes'), 400);
-  }
-  req.filteredBody = filterdObj(req.body, 'name', 'email'); // fields declaration for user only can update name and email
-  next();
-});
-
-exports.updateUser = factoryController.updateOne(User);
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+  await User.findByIdAndUpdate(req.user.id, {
+    active: false
+  });
   res.status(204).json({
     status: 'success',
     data: null
   });
   next();
 });
+
+exports.getUser = factoryController.getOne(User);
+exports.postUsers = factoryController.createOne(User);
+exports.updateUser = factoryController.updateOne(User);
 exports.deleteUser = factoryController.deleteOne(User);
