@@ -4,27 +4,51 @@ const authController = require('../controllers/authController');
 const reviewRoutes = require('./reviewRoutes');
 
 const router = express.Router();
-
-router.use('/:tourId/reviews', reviewRoutes);
+router.use('/:tourId/reviews', authController.verifyRoutes, reviewRoutes);
 router
   .route('/bestdeals')
-  .get(tourController.getGoodPrice, tourController.getAllTours);
+  .get(
+    authController.verifyRoutes,
+    tourController.getGoodPrice,
+    tourController.getAllTours
+  );
 router
   .route('/bestseller')
-  .get(tourController.getBestSeller, tourController.getAllTours);
-
-router.route('/tour-stats').get(tourController.getStatsTour);
-router.route('/monthly-plan/:year').get(tourController.getMonthlyPlan);
-
+  .get(
+    authController.verifyRoutes,
+    tourController.getBestSeller,
+    tourController.getAllTours
+  );
+router
+  .route('/tour-stats')
+  .get(
+    authController.verifyRoutes,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.getStatsTour
+  );
+router
+  .route('/monthly-plan/:year')
+  .get(
+    authController.verifyRoutes,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.getMonthlyPlan
+  );
 router
   .route('/')
-  .get(authController.verifyRoutes, tourController.getAllTours)
-  .post(tourController.postTour);
-
+  .get(tourController.getAllTours)
+  .post(
+    authController.verifyRoutes,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.postTour
+  );
 router
   .route('/:id')
   .get(tourController.getTour)
-  .patch(tourController.updateTour)
+  .patch(
+    authController.verifyRoutes,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.updateTour
+  )
   .delete(
     authController.verifyRoutes,
     authController.restrictTo('admin', 'lead-guide'),
