@@ -21,7 +21,13 @@ router
 router
   .route('/deleteMe')
   .delete(authController.verifyRoutes, userController.deleteMe);
-
+router
+  .route('/me')
+  .get(
+    authController.verifyRoutes,
+    userController.getMe,
+    userController.getUser
+  );
 router.route('/').get(userController.getAllUsers);
 
 router
