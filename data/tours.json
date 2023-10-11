@@ -1,10 +1,16 @@
 [{
+    "_id": "65262feef1e3dc2a1cb5b8b0",
     "name": "Gunung Bromo",
     "duration": 2,
     "maxGroupSize": 25,
     "difficulty": "easy",
+    "guides": [
+      "6526206fcd00acf982494e31",
+      "6526206fcd00acf982494e33",
+      "6526206fcd00acf982494e34"
+    ],
     "ratingsAverage": 4.7,
-    "ratingsQuantity": 37,
+    "ratingsQuantity": 10,
     "price": 750,
     "summary": "Petualangan 2 hari di Gunung Bromo dengan panduan lokal untuk menikmati keindahan alam dan kawah gunung.",
     "description": "Nikmati keindahan alam Gunung Bromo yang terkenal dengan pemandangan matahari terbitnya yang menakjubkan. Anda akan mendaki dan mengeksplorasi kawah gunung yang masih aktif ini dengan pemandu lokal yang berpengalaman.",
@@ -17,8 +23,7 @@
       "coordinates": [-7.9493464604221575, 112.61665562456876],
       "address": "Jl. Soekarno-Hatta, No.2"
     },
-    "locations": [
-      {
+    "locations": [{
         "address": "Seruni Point",
         "description": "Area hiking & tempat melihat sunrise yang populer dengan pemandangan Gunung Bromo yang menakjubkan",
         "type": "Point",
@@ -30,15 +35,21 @@
         "type": "Point",
         "coordinates": [-7.926366801100694, 112.95416506135565]
       }
-  ]
+    ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b1",
     "name": "Bali",
     "duration": 7,
     "maxGroupSize": 20,
     "difficulty": "medium",
+    "guides": [
+      "6526206fcd00acf982494e32",
+      "6526206fcd00acf982494e36",
+      "6526206fcd00acf982494e35"
+    ],
     "ratingsAverage": 4.7,
-    "ratingsQuantity": 37,
+    "ratingsQuantity": 9,
     "price": 2500,
     "summary": "Liburan 7 hari di Pulau Bali dengan kunjungan ke Ubud, Kuta, dan Uluwatu, serta aktivitas pantai.",
     "description": "Jelajahi keajaiban Pulau Bali yang terkenal dengan pantai-pantai indah, budaya yang kaya, dan makanan lezat. Tur ini akan membawa Anda mengunjungi tempat-tempat menarik seperti Ubud, Kuta, dan Uluwatu.",
@@ -51,8 +62,7 @@
       "coordinates": [-8.744784550463804, 115.16594853563574],
       "address": "Jl. I Gusti Ngurah Rai"
     },
-    "locations": [
-      {
+    "locations": [{
         "address": "Pantai Kuta",
         "description": "Hamparan pasir ramai dengan deretan restoran & resor, tempat terkenal untuk selancar & matahari terbenam.",
         "type": "Point",
@@ -70,15 +80,21 @@
         "type": "Point",
         "coordinates": [-8.274693997175953, 115.16679961274481]
       }
-  ]
+    ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b2",
     "name": "Surakarta",
     "duration": 3,
     "maxGroupSize": 10,
     "difficulty": "difficult",
+    "guides": [
+      "6526206fcd00acf982494e31",
+      "6526206fcd00acf982494e33",
+      "6526206fcd00acf982494e34"
+    ],
     "ratingsAverage": 4.5,
-    "ratingsQuantity": 30,
+    "ratingsQuantity": 11,
     "price": 1000,
     "summary": "Eksplorasi 3 hari di Surakarta, menikmati budaya lokal jawa.",
     "description": "Terletak di Jawa Tengah, Surakarta merupakan kota yang tak kalah bagus dengan Yogyakarta dengan budaya yang menarik.",
@@ -112,12 +128,18 @@
     ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b3",
     "name": "Gili Island",
     "duration": 4,
     "maxGroupSize": 12,
     "difficulty": "medium",
+    "guides": [
+      "6526206fcd00acf982494e32",
+      "6526206fcd00acf982494e36",
+      "6526206fcd00acf982494e35"
+    ],
     "ratingsAverage": 4.9,
-    "ratingsQuantity": 50,
+    "ratingsQuantity": 8,
     "price": 1800,
     "summary": "Petualangan 4 hari di tiga pulau Gili dengan snorkeling, menyelam, dan bersantai di pantai.",
     "description": "Jelajahi kecantikan tiga pulau Gili di Lombok - Gili Trawangan, Gili Meno, dan Gili Air. Snorkeling, menyelam, dan bersantai di pantai pasir putih adalah aktivitas yang menunggu Anda di sini.",
@@ -145,12 +167,18 @@
     ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b4",
     "name": "Raja Ampat",
     "duration": 6,
     "maxGroupSize": 8,
     "difficulty": "difficult",
+    "guides": [
+      "6526206fcd00acf982494e31",
+      "6526206fcd00acf982494e33",
+      "6526206fcd00acf982494e34"
+    ],
     "ratingsAverage": 4.5,
-    "ratingsQuantity": 18,
+    "ratingsQuantity": 5,
     "price": 3500,
     "summary": "Ekspedisi 6 hari ke Raja Ampat untuk menyelam, snorkeling, dan menjelajahi keindahan alam laut dan pulau-pulau terpencil.",
     "description": "Raja Ampat dikenal sebagai surganya penyelam dengan keanekaragaman hayati laut yang luar biasa. Selain snorkeling dan menyelam, Anda akan menjelajahi pulau-pulau terpencil dan keindahan alam yang tak tertandingi di wilayah ini.",
@@ -178,12 +206,18 @@
     ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b5",
     "name": "Pulau Komodo",
     "duration": 5,
     "maxGroupSize": 10,
     "difficulty": "medium",
+    "guides": [
+      "6526206fcd00acf982494e32",
+      "6526206fcd00acf982494e36",
+      "6526206fcd00acf982494e35"
+    ],
     "ratingsAverage": 4.7,
-    "ratingsQuantity": 30,
+    "ratingsQuantity": 6,
     "price": 2900,
     "summary": " Petualangan 5 hari ke Pulau Komodo untuk melihat kadal komodo dan aktivitas snorkeling.",
     "description": "Kunjungi Pulau Komodo dan lihat secara langsung kadal komodo, reptil raksasa yang hanya bisa ditemukan di wilayah ini. Selain itu, Anda dapat menjelajahi keindahan bawah airnya dengan snorkeling dan menyelam.",
@@ -211,12 +245,18 @@
     ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b6",
     "name": "Yogyakarta",
     "duration": 4,
     "maxGroupSize": 15,
     "difficulty": "easy",
+    "guides": [
+      "6526206fcd00acf982494e31",
+      "6526206fcd00acf982494e33",
+      "6526206fcd00acf982494e34"
+    ],
     "ratingsAverage": 4.8,
-    "ratingsQuantity": 40,
+    "ratingsQuantity": 10,
     "price": 1000,
     "summary": "Wisata 4 hari ke Yogyakarta dengan kunjungan ke candi dan tempat wisata budaya.",
     "description": "Yogyakarta adalah kota budaya dengan pesona sejarah dan alam yang menawan. Nikmati kunjungan ke Candi Borobudur, Candi Prambanan, Malioboro, dan wisata-wisata menarik lainnya.",
@@ -256,12 +296,63 @@
     ]
   },
   {
+    "_id": "65262feef1e3dc2a1cb5b8b7",
+    "name": "Semarang",
+    "duration": 2,
+    "maxGroupSize": 8,
+    "difficulty": "easy",
+    "guides": [
+      "6526206fcd00acf982494e32",
+      "6526206fcd00acf982494e36",
+      "6526206fcd00acf982494e35"
+    ],
+    "ratingsAverage": 4.3,
+    "ratingsQuantity": 9,
+    "price": 830,
+    "summary": "Petualangan 2 hari di Semarang dengan menyusuri tempat bersejarah dan tempat wisata terkenal lainnya.",
+    "description": "Semarang adalah kota vintage. Di sini, Anda dapat menjelajahi tempat yang indah dan dapat bernostalgia.",
+    "imageCover": "tour-8-cover.jpg",
+    "images": ["tour-8-1.jpg", "tour-8-2.jpg", "tour-8-3.jpg"],
+    "startDates": ["2023-11-10,10:00", "2024-03-01,08:00", "2024-08-04,09:00"],
+    "startPoint": {
+      "description": "Stasiun Semarang Tawang",
+      "type": "Point",
+      "coordinates": [-6.9643455572641635, 110.42792150773306],
+      "address": "Jl. Taman Tawang"
+    },
+    "locations": [{
+        "address": "Lawang Sewu",
+        "description": "Bekas kantor pusat Perusahaan Kereta Api Hindia Belanda era kolonial, terkenal dengan banyaknya pintu sehingga disebut lawang sewu.",
+        "type": "Point",
+        "coordinates": [-6.9833334137107235, 110.41081070398583]
+      },
+      {
+        "address": "Marina Beach",
+        "description": "Jalan kayu tepi laut di sepanjang pantai beraspal yang populer dengan pemandangan matahari terbenam, dengan kios jajanan & tempat memancing.",
+        "type": "Point",
+        "coordinates": [-6.947556394778989, 110.38950398838409]
+      },
+      {
+        "address": "Temple Sam Poo Kong",
+        "description": "Kompleks candi bersejarah dengan ciri arsitektur tradisional Tiongkok dan Jawa.",
+        "type": "Point",
+        "coordinates": [-6.995575870896322, 110.39808582896491]
+      }
+    ]
+  },
+  {
+    "_id": "65262feef1e3dc2a1cb5b8b8",
     "name": "Bandung",
     "duration": 3,
     "maxGroupSize": 8,
     "difficulty": "medium",
+    "guides": [
+      "6526206fcd00acf982494e31",
+      "6526206fcd00acf982494e33",
+      "6526206fcd00acf982494e34"
+    ],
     "ratingsAverage": 4.5,
-    "ratingsQuantity": 20,
+    "ratingsQuantity": 8,
     "price": 1800,
     "summary": "Petualangan 3 hari di Bandung dengan menyusuri tempat aestethic khas bandung dan tempat wisata lainnya.",
     "description": "Bandung adalah kota anak muda. Di sini, Anda dapat menjelajahi tempat yang indah dan dingin.",
@@ -276,7 +367,7 @@
     },
     "locations": [{
         "address": "Taman Braga",
-        "description": "Nama jalan ini cukup dikenal sejak masa pemerintahan Hindia Belanda. Sampai saat ini nama jalan tersebut tetap dipertahankan sebagai salah satu maskot dan objek wisata kota Bandung ",
+        "description": "Nama jalan ini cukup dikenal sejak masa pemerintahan Hindia Belanda. Sampai saat ini nama jalan tersebut tetap dipertahankan sebagai salah satu maskot dan objek wisata kota Bandung.",
         "type": "Point",
         "coordinates": [-6.919664211638112, 107.61004184211389]
       },

@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "6526206fcd00acf982494e30",
+    "name": "Admin Fluxtours",
+    "email": "flux@tours.io",
+    "role": "admin",
+    "active": true,
+    "photo": "user-1.jpg",
+    "password": "$2y$10$E7ljW7i72cVhhg96W0SHs.1MAkku/Htl6KLYapx204rDYHw04wWiO"
+  },
+  {
+    "_id": "6526206fcd00acf982494e31",
+    "name": "Yuki Tsunoda",
+    "email": "yuki@f1.com",
+    "role": "lead-guide",
+    "active": true,
+    "photo": "user-2.jpg",
+    "password": "$2y$10$7aelPnLCY.KDCEp7kC4O/eiBYCjnjh0g65jzpi7UScCzvxGggo3lq"
+  },
+  {
+    "_id": "6526206fcd00acf982494e32",
+    "name": "Max Verstappen",
+    "email": "max@f1.com",
+    "role": "lead-guide",
+    "active": true,
+    "photo": "user-3.jpg",
+    "password": "$2y$10$A1VeSBR8Np8DMQ4W7OYEWeH/g3/CNzS6qfbhis0t83MzSz3bROYZq"
+  },
+  {
+    "_id": "6526206fcd00acf982494e33",
+    "name": "Sebastian Vettel",
+    "email": "bastian@f1.com",
+    "role": "guide",
+    "active": true,
+    "photo": "user-4.jpg",
+    "password": "$2y$10$UDu.wnM2n1b3Kui9dB6Uzum85/U3SbxyOjIMayrkKbfdwyNOpmlCG"
+  },
+  {
+    "_id": "6526206fcd00acf982494e34",
+    "name": "Charles Leclerc",
+    "email": "charles@f1.com",
+    "role": "guide",
+    "active": true,
+    "photo": "user-5.jpg",
+    "password": "$2y$10$OvSFFuo2IYeqLG.ANOk0hO4ivOe4I7yys8cpwYVO7jHBW2aBFdi.u"
+  },
+  {
+    "_id": "6526206fcd00acf982494e35",
+    "name": "Lewis Hamilton",
+    "email": "lewis@f1.com",
+    "role": "guide",
+    "active": true,
+    "photo": "user-6.jpg",
+    "password": "$$2y$10$B7Mz5VDVVzFUaxy3kylFJO3aoIYChUVtqqiMiHgsvAkX77xRNbAOa"
+  },
+  {
+    "_id": "6526206fcd00acf982494e36",
+    "name": "George Russel",
+    "email": "george@f1.com",
+    "role": "guide",
+    "active": true,
+    "photo": "user-7.jpg",
+    "password": "$2y$10$6ge4Vs3vtMyK9CZRORr1QOHJFKPn9BSfeZDYivsxCMIeViVcTRH2a"
+  },
+  {
+    "_id": "6526206fcd00acf982494e37",
+    "name": "Francesco Bagnaia",
+    "email": "bagnaia@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-8.jpg",
+    "password": "$2y$10$KE/GQ1pvFYN7absPKBtoRuvlJO34xb9CGpIHeTXBJUMQ2KOQlTeoG"
+  },
+  {
+    "_id": "6526206fcd00acf982494e38",
+    "name": "Enea Bastianini",
+    "email": "bastianini@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-9.jpg",
+    "password": "$2y$10$0l/sWK7uKRTnjMAmdNXqCOVzvydsqo9gF65rrVFSWirrQ3worteJG"
+  },
+  {
+    "_id": "6526206fcd00acf982494e39",
+    "name": "Joan Mir",
+    "email": "joan@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-10.jpg",
+    "password": "$2y$10$V7gEVWQf1q5AW2AbVqcmQ.WxBl9S2DXP.znD0u81nlxXXcZ.6aJfi"
+  },
+  {
+    "_id": "6526206fcd00acf982494e40",
+    "name": "Pol Espargaro",
+    "email": "espargaro@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-11.jpg",
+    "password": "$2y$10$.HEMOog9CxWcPKZdRv1CbO0yYrzS5a7N9R1G0ZaPqnAmAjMVciOWG"
+  },
+  {
+    "_id": "6526206fcd00acf982494e41",
+    "name": "Miguel Oliveira",
+    "email": "oliveira@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-12.jpg",
+    "password": "$2y$10$.HEMOog9CxWcPKZdRv1CbO0yYrzS5a7N9R1G0ZaPqnAmAjMVciOWG"
+  },
+  {
+    "_id": "6526206fcd00acf982494e42",
+    "name": "Lando Norris",
+    "email": "norris@f1.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-13.jpg",
+    "password": "$2y$10$W.Ug2vLDq.ZoRwb/PUqGFePv6NiZUBe2UgDjHd3.U/1DAYVLJ6Y.2"
+  },
+  {
+    "_id": "6526206fcd00acf982494e43",
+    "name": "Pierre Gasly",
+    "email": "gasly@f1.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-14.jpg",
+    "password": "$2y$10$XD7BQGfk4PaljC//XteVVOiQMfK.kmUe9n7Cn8BncEUEEkGPCyRVy"
+  },
+  {
+    "_id": "6526206fcd00acf982494e44",
+    "name": "Lance Stroll",
+    "email": "lance@f1.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-15.jpg",
+    "password": "$2y$10$XD7BQGfk4PaljC//XteVVOiQMfK.kmUe9n7Cn8BncEUEEkGPCyRVy"
+  },
+  {
+    "_id": "6526206fcd00acf982494e45",
+    "name": "Alvaro Bautista",
+    "email": "bautista@wsbk.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-16.jpg",
+    "password": "$2y$10$cswWFb99RZAPqM794JDQj.MtZ3JVUpTSmfPmpD9ikQ2DmErSh6Obe"
+  },
+  {
+    "_id": "6526206fcd00acf982494e46",
+    "name": "Danilo Petrucci",
+    "email": "petrucci@wsbk.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-17.jpg",
+    "password": "$2y$10$45qq/KlJggbk7zssgDlFhehJ6BoescN6/XWc6nlIMCKlspdsGo5/W"
+  },
+  {
+    "_id": "6526206fcd00acf982494e47",
+    "name": "Jonathan Rea",
+    "email": "rea@wsbk.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-18.jpg",
+    "password": "$2y$10$ipHXBQOZ1zz/VQZlEmlWguOgoUI5Xb7zrBLWcuoGkg8GKyFu/itka"
+  },
+  {
+    "_id": "6526206fcd00acf982494e48",
+    "name": "Marco Bezzecchi",
+    "email": "bezzecchi@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-19.jpg",
+    "password": "$2y$10$G/janVQGcYvqU78PjhzGFeqUZj/nD/7FSp83U/AuxEyJnhcMRHcmK"
+  },
+  {
+    "_id": "6526206fcd00acf982494e49",
+    "name": "Johann Zarco",
+    "email": "zarco@motogp.com",
+    "role": "user",
+    "active": true,
+    "photo": "user-20.jpg",
+    "password": "$2y$10$zyy24camC4MadeDdUdbRh.dQDkeYzrkpWbKO7r4WRnB9EwKDF3/Me"
+  }
+]

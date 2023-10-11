@@ -6,6 +6,8 @@ dotenv.config({
   path: `${__dirname}/../init.env`
 });
 const Tour = require('../models/tourModel');
+const User = require('../models/userModel');
+const Review = require('../models/reviewModel');
 
 const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD_DB);
 mongoose
@@ -19,10 +21,15 @@ mongoose
     console.log('DB connection success!');
   });
 
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/simple.json`, 'utf-8'));
+// const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
+// const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
+const reviews = JSON.parse(
+  fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
+);
 const importData = async () => {
   try {
-    await Tour.create(tours);
+    await Review.create(reviews);
+    // await User.create(users, { validationBeforeSafe: false });
     console.log('Data successfully loaded!');
     process.exit();
   } catch (err) {
@@ -31,7 +38,8 @@ const importData = async () => {
 };
 const deleteData = async () => {
   try {
-    await Tour.deleteMany();
+    await Review.deleteMany();
+    // await User.deleteMany();
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);
