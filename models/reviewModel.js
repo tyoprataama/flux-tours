@@ -65,6 +65,10 @@ reviewSchema.post('save', function() {
   this.constructor.calculateReviewAvg(this.tour);
 });
 
+reviewSchema.post(/^findOneAnd/, async function(doc) {
+  await doc.constructor.calculateReviewAvg(doc.tour);
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
