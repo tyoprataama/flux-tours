@@ -51,12 +51,21 @@ reviewSchema.statics.calculateReviewAvg = async function(tourId) {
       }
     }
   ]);
-  //  Synchronize the ratingsAvg and ratingsQuantity based on real user reviews
-  await Tour.findByIdAndUpdate(tourId, {
-    //  Because stats return array we using stats[0] and specified the field
-    ratingsAverage: stats[0].avgRating,
-    ratingsQuantity: stats[0].nRating
-  });
+
+  if (stats.length > 0) {
+    //  Synchronize the ratingsAvg and ratingsQuantity based on real user reviews
+    await Tour.findByIdAndUpdate(tourId, {
+      //  Because stats return array we using stats[0] and specified the field
+      ratingsAverage: stats[0].avgRating,
+      ratingsQuantity: stats[0].nRating
+    });
+  } else {
+    //  If there is no review reset the ratings to 4.5
+    await Tour.findByIdAndUpdate(tourId, {
+      ratingsAverage: 4.5,
+      ratingsQuantity: 0
+    });
+  }
 };
 
 reviewSchema.post('save', function() {
