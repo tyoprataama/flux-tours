@@ -1,4 +1,5 @@
 const Tour = require('../models/tourModel');
+const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factoryController = require('./factoryController');
 
@@ -120,6 +121,73 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getTourWithIn = catchAsync(async (req, res, next) => {
+  const { distance, location, unit } = req.params;
+  const [lat, long] = location.split(',');
+  const radius = unit === 'km' ? distance / 6378.1 : distance / 3963.2;
+
+  if (!lat || !long) {
+    next(
+      new AppError(
+        'Please provide your locations in latitude and longtitude!',
+        400
+      )
+    );
+  }
+  console.log(distance, lat, long, unit, radius);
+  const tours = await Tour.find({
+    startPoint: { $geoWithin: { $centerSphere: [[long, lat], radius] } }
+  });
+  res.status(200).json({
+    status: 'success!',
+    length: tours.length,
+    data: {
+      data: tours
+    }
+  });
+});
+
+exports.getDistances = catchAsync(async (req, res, next) => {
+  const { location, unit } = req.params;
+  const [lat, long] = location.split(',');
+  const multiplier = unit === 'km' ? 0.001 : 0.000621317;
+
+  if (!lat || !long) {
+    next(
+      new AppError(
+        'Please provide your locations in latitude and longtitude!',
+        400
+      )
+    );
+  }
+
+  const distances = await Tour.aggregate([
+    {
+      $geoNear: {
+        near: {
+          type: 'Point',
+          coordinates: [long * 1, lat * 1]
+        },
+        distanceField: 'distances',
+        distanceMultiplier: multiplier // Convert into km / miles instead of meters
+      }
+    },
+    {
+      $project: {
+        distances: 1,
+        name: 1
+      }
+    }
+  ]);
+
+  res.status(200).json({
+    status: 'success!',
+    length: distances.length,
+    data: {
+      data: distances
+    }
+  });
+});
 exports.getTour = factoryController.getOne(Tour, { path: 'reviews' });
 exports.postTour = factoryController.createOne(Tour);
 exports.updateTour = factoryController.updateOne(Tour);

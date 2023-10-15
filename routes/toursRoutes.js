@@ -41,6 +41,13 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.postTour
   );
+
+router
+  .route('/tours-within/:distance/center/:location/:unit')
+  .get(tourController.getTourWithIn);
+
+router.route('/distance/:location/unit/:unit').get(tourController.getDistances);
+
 router
   .route('/:id')
   .get(tourController.getTour)

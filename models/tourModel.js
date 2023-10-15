@@ -113,6 +113,7 @@ const tourSchema = new mongoose.Schema(
 );
 
 tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ 'startPoint.coordinates': '2dsphere' });
 tourSchema.virtual('reviews', {
   ref: 'Review',
   localField: '_id',
