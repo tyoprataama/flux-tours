@@ -20,20 +20,20 @@
     "startPoint": {
       "description": "Malang, Jawa Timur",
       "type": "Point",
-      "coordinates": [-7.9493464604221575, 112.61665562456876],
+      "coordinates": [112.61665562456876, -7.9493464604221575],
       "address": "Jl. Soekarno-Hatta, No.2"
     },
     "locations": [{
         "address": "Seruni Point",
         "description": "Area hiking & tempat melihat sunrise yang populer dengan pemandangan Gunung Bromo yang menakjubkan",
         "type": "Point",
-        "coordinates": [-7.909889836679638, 112.95072945475675]
+        "coordinates": [112.95072945475675, -7.909889836679638]
       },
       {
         "address": "Lautan Pasir",
         "description": "Dataran yang disebut 'Lautan Pasir' yang mengelilingi Gunung Bromo yang berasap, terbentuk dari abu letusan bekas letusan.",
         "type": "Point",
-        "coordinates": [-7.926366801100694, 112.95416506135565]
+        "coordinates": [112.95416506135565, -7.926366801100694]
       }
     ]
   },
@@ -59,26 +59,26 @@
     "startPoint": {
       "description": "I Gusti Ngurah Rai International Airport",
       "type": "Point",
-      "coordinates": [-8.744784550463804, 115.16594853563574],
+      "coordinates": [115.16594853563574, -8.744784550463804],
       "address": "Jl. I Gusti Ngurah Rai"
     },
     "locations": [{
         "address": "Pantai Kuta",
         "description": "Hamparan pasir ramai dengan deretan restoran & resor, tempat terkenal untuk selancar & matahari terbenam.",
         "type": "Point",
-        "coordinates": [-8.718021414384983, 115.16856286162727]
+        "coordinates": [115.16856286162727, -8.718021414384983]
       },
       {
         "address": "Uluwatu Temple",
         "description": "Pura Hindu kuno yang terletak di atas tebing ini memiliki pemandangan laut dan menyelenggarakan pertunjukan tari kecak tradisional.",
         "type": "Point",
-        "coordinates": [-8.828109211537829, 115.0850407307445]
+        "coordinates": [115.0850407307445, -8.828109211537829]
       },
       {
         "address": "Ulun Danu Beratan Temple",
         "description": "Kuil Hindu yang indah di danau dengan taman, perahu & hewan liar untuk berfoto.",
         "type": "Point",
-        "coordinates": [-8.274693997175953, 115.16679961274481]
+        "coordinates": [115.16679961274481, -8.274693997175953]
       }
     ]
   },
@@ -104,26 +104,26 @@
     "startPoint": {
       "description": "Stasiun Solo Balapan",
       "type": "Point",
-      "coordinates": [-7.556896100277588, 110.82131502271427],
+      "coordinates": [110.82131502271427, -7.556896100277588],
       "address": "Jl. Monginsidi, No.23"
     },
     "locations": [{
         "address": "Keraton Surakarta Hadiningrat",
         "description": "Istana terkenal dari tahun 1744 dengan tur & museum yang menampilkan patung, senjata & artefak lainnya.",
         "type": "Point",
-        "coordinates": [-7.578126706016011, 110.82773781107032]
+        "coordinates": [110.82773781107032, -7.578126706016011]
       },
       {
         "address": "Solo Safari",
         "description": "Kebun binatang tradisional dengan burung, mamalia, menunggang gajah & unta, serta banyak program edukasi.",
         "type": "Point",
-        "coordinates": [-7.563859975069498, 110.85838232242867]
+        "coordinates": [110.85838232242867, -7.563859975069498]
       },
       {
         "address": "Mangkunegaran Palace",
         "description": "Kediaman kerajaan sejak 1757, sebagian terbuka untuk umum untuk melihat-lihat pameran bersejarah.",
         "type": "Point",
-        "coordinates": [-7.566749596194729, 110.82258753777096]
+        "coordinates": [110.82258753777096, -7.566749596194729]
       }
     ]
   },
@@ -149,20 +149,20 @@
     "startPoint": {
       "description": "Lombok International Airport",
       "type": "Point",
-      "coordinates": [-8.761847289344043, 116.27350796076425],
+      "coordinates": [116.27350796076425, -8.761847289344043],
       "address": "Jl. Bypass Bandara"
     },
     "locations": [{
         "address": "Sunset Point Gili Trawangan",
         "description": "Nikmati sunset point di pantai Gili dengan pemandangan yang menakjubkan.",
         "type": "Point",
-        "coordinates": [-8.356672081632533, 116.03422194968716]
+        "coordinates": [116.03422194968716, -8.356672081632533]
       },
       {
         "address": "Pantai Sire",
         "description": "Menggunakan kapal untuk menuju pantai tepencil yang sangat terjaga.",
         "type": "Point",
-        "coordinates": [-8.360533473968138, 116.11149837536185]
+        "coordinates": [116.11149837536185, -8.360533473968138]
       }
     ]
   },
@@ -188,20 +188,20 @@
     "startPoint": {
       "description": "Pelabuhan Besar Namlea",
       "type": "Point",
-      "coordinates": [-3.151405840891462, 127.09456571756986],
+      "coordinates": [127.09456571756986, -3.151405840891462],
       "address": "Kec. Namlea, Maluku"
     },
     "locations": [{
         "address": "Piaynemo Raja Ampat",
         "description": "Pengunjung mendaki ke platform tingkat tinggi untuk menikmati pemandangan pulau-pulau spektakuler ini.",
         "type": "Point",
-        "coordinates": [-0.499665708579575, 130.2789499478904]
+        "coordinates": [130.2789499478904, -0.499665708579575]
       },
       {
         "address": "Sauwandarek Village",
         "description": "Eksplor desa native dari pedalaman papua",
         "type": "Point",
-        "coordinates": [-0.5620786160885697, 130.58640541202038]
+        "coordinates": [130.58640541202038, -0.5620786160885697]
       }
     ]
   },
@@ -227,20 +227,20 @@
     "startPoint": {
       "description": "Komodo Airport",
       "type": "Point",
-      "coordinates": [-8.485080869838303, 119.88740095866737],
+      "coordinates": [119.88740095866737, -8.485080869838303],
       "address": "Jl. Batu Cermin, NTT"
     },
     "locations": [{
         "address": "Komodo National Park",
         "description": "Taman nasional luas yang bertujuan melindungi komodo dan satwa liar lainnya yang terancam punah.",
         "type": "Point",
-        "coordinates": [-8.511719780072454, 119.36412766748695]
+        "coordinates": [119.36412766748695, -8.511719780072454]
       },
       {
         "address": "Padar Island",
         "description": "Pantai berpasir putih, merah muda, dan hitam di pulau kecil ini terkenal dengan satwa liar dan panoramanya.",
         "type": "Point",
-        "coordinates": [-8.648396917094447, 119.58446092457066]
+        "coordinates": [119.58446092457066, -8.648396917094447]
       }
     ]
   },
@@ -266,32 +266,32 @@
     "startPoint": {
       "description": "Stasiun Lempuyangan",
       "type": "Point",
-      "coordinates": [-7.790099815097283, 110.3756929227175],
+      "coordinates": [110.3756929227175, -7.790099815097283],
       "address": "Bausasran, Yogyakarta"
     },
     "locations": [{
         "address": "Taman Sari",
         "description": "Bekas taman kerajaan abad ke-18 yang penuh hiasan arsitektur dengan kompleks pemandian bertingkat.",
         "type": "Point",
-        "coordinates": [-7.809025625836775, 110.35928643777096]
+        "coordinates": [110.35928643777096, -7.809025625836775]
       },
       {
         "address": "Keraton Ngayogyakarta Hadiningrat",
         "description": "Dibangun pada abad ke-18, istana megah ini masih digunakan oleh keluarga kerajaan Indonesia.",
         "type": "Point",
-        "coordinates": [-7.804688832021069, 110.36413587145108]
+        "coordinates": [110.36413587145108, -7.804688832021069]
       },
       {
         "address": "Titik Nol Kilometer",
         "description": "Tempat yang terkenal di Yogyakarta tempat berkumpul anak muda.",
         "type": "Point",
-        "coordinates": [-7.8005645843978675, 110.3646508555587]
+        "coordinates": [110.3646508555587, -7.8005645843978675]
       },
       {
         "address": "Jl Malioboro",
         "description": "Jalan populer yang dipenuhi kios suvenir, penjual makanan & restoran, dengan wahana kereta kuda.",
         "type": "Point",
-        "coordinates": [-7.792448835084996, 110.365842995731]
+        "coordinates": [110.365842995731, -7.792448835084996]
       }
     ]
   },
@@ -317,26 +317,26 @@
     "startPoint": {
       "description": "Stasiun Semarang Tawang",
       "type": "Point",
-      "coordinates": [-6.9643455572641635, 110.42792150773306],
+      "coordinates": [110.42792150773306, -6.9643455572641635],
       "address": "Jl. Taman Tawang"
     },
     "locations": [{
         "address": "Lawang Sewu",
         "description": "Bekas kantor pusat Perusahaan Kereta Api Hindia Belanda era kolonial, terkenal dengan banyaknya pintu sehingga disebut lawang sewu.",
         "type": "Point",
-        "coordinates": [-6.9833334137107235, 110.41081070398583]
+        "coordinates": [110.41081070398583, -6.9833334137107235]
       },
       {
         "address": "Marina Beach",
         "description": "Jalan kayu tepi laut di sepanjang pantai beraspal yang populer dengan pemandangan matahari terbenam, dengan kios jajanan & tempat memancing.",
         "type": "Point",
-        "coordinates": [-6.947556394778989, 110.38950398838409]
+        "coordinates": [110.38950398838409, -6.947556394778989]
       },
       {
         "address": "Temple Sam Poo Kong",
         "description": "Kompleks candi bersejarah dengan ciri arsitektur tradisional Tiongkok dan Jawa.",
         "type": "Point",
-        "coordinates": [-6.995575870896322, 110.39808582896491]
+        "coordinates": [110.39808582896491, -6.995575870896322]
       }
     ]
   },
@@ -362,20 +362,20 @@
     "startPoint": {
       "description": "Stasiun Bandung",
       "type": "Point",
-      "coordinates": [-6.914518783450162, 107.60239468037672],
+      "coordinates": [107.60239468037672, -6.914518783450162],
       "address": "Jl. Stasiun Barat"
     },
     "locations": [{
         "address": "Taman Braga",
         "description": "Nama jalan ini cukup dikenal sejak masa pemerintahan Hindia Belanda. Sampai saat ini nama jalan tersebut tetap dipertahankan sebagai salah satu maskot dan objek wisata kota Bandung.",
         "type": "Point",
-        "coordinates": [-6.919664211638112, 107.61004184211389]
+        "coordinates": [107.61004184211389, -6.919664211638112]
       },
       {
         "address": "Farmhouse Susu Lembang",
         "description": "Taman hiburan dengan bangunan bergaya Eropa, penyewaan kostum Belanda, kebun binatang mini & restoran trendi.",
         "type": "Point",
-        "coordinates": [-6.8327293157378195, 107.605543197936]
+        "coordinates": [107.605543197936, -6.8327293157378195]
       }
     ]
   }
