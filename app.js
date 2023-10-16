@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const hpp = require('hpp');
+const path = require('path');
 
 const app = express();
 
@@ -15,6 +16,13 @@ const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 
 console.log(process.env.NODE_ENV);
+
+//  Serving static files
+app.use(express.static(path.join(__dirname, 'public')));
+//  Rendering the interface
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views')); // Using path to prevent bugs
+
 //////////   MIDDLEWARE //////////
 
 // Set security HTTP headers
@@ -61,6 +69,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.get('/', (req, res) => {
+  res.status(200).render('base');
+});
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
