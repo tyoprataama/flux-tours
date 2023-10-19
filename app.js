@@ -14,6 +14,7 @@ const globalErrorHandling = require('./controllers/errorController');
 const tourRoutes = require('./routes/toursRoutes');
 const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const viewsRoutes = require('./routes/viewsRoutes');
 
 console.log(process.env.NODE_ENV);
 
@@ -69,19 +70,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get('/', (req, res) => {
-  res.status(200).render('base');
-});
-app.get('/overview', (req, res) => {
-  res.status(200).render('overview', {
-    title: 'Overview'
-  });
-});
-app.get('/tour', (req, res) => {
-  res.status(200).render('tour', {
-    title: 'Tour'
-  });
-});
+app.use('/', viewsRoutes);
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
