@@ -72,6 +72,16 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.status(200).render('base');
 });
+app.get('/overview', (req, res) => {
+  res.status(200).render('overview', {
+    title: 'Overview'
+  });
+});
+app.get('/tour', (req, res) => {
+  res.status(200).render('tour', {
+    title: 'Tour'
+  });
+});
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
