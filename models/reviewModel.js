@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Reviews must have a character']
     },
-    ratings: {
+    rating: {
       type: Number,
       min: [1, 'Ratings must above 1'],
       max: [5, 'Ratings must below 5']
@@ -49,7 +49,7 @@ reviewSchema.statics.calculateReviewAvg = async function(tourId) {
       $group: {
         _id: '$tour',
         nRating: { $sum: 1 },
-        avgRating: { $avg: '$ratings' }
+        avgRating: { $avg: '$rating' }
       }
     }
   ]);

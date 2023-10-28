@@ -1,4 +1,73 @@
 extends base
+include _reviewCard
+
+mixin overviewBox(icon, label, text)
+  .overview-box__detail
+    svg.overview-box__icon
+      use(xlink:href=`img/icon.svg#icon-${icon}`)
+    span.overview-box__label= label
+    span.overview-box__text= text
 
 block content 
-  h1 This is tour
+  section.section-header
+    .header__hero
+      .header__hero-overlay &nbsp;
+      img.header__hero-img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
+
+    .heading-box
+      h1.heading-primary
+        span= `${tour.name} Tour`
+      .heading-box__group
+        .heading-box__detail
+          svg.heading-box__icon
+            use(xlink:href='/img/icon.svg#icon-clock')
+          span.heading-box__text= `${tour.duration} hari`
+        .heading-box__detail
+          svg.heading-box__icon
+            use(xlink:href='/img/icon.svg#icon-map-pin')
+          span.heading-box__text= tour.startPoint.description
+  section.section-description
+    .overview-box
+      div
+        .overview-box__group
+          h2.heading-secondary.ma-bt-lg Tentang tour
+          -const date = tour.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
+          .card__data
+          +overviewBox('calendar', 'Keberangkatan', date)
+          +overviewBox('trending-up', 'Level', tour.difficulty)
+          +overviewBox('user', 'Peserta', `${tour.maxGroupSize} orang`)
+          +overviewBox('star', 'Ratings', `${tour.ratingsAverage} / 5`)
+        .overview-box__group
+          h2.heading-secondary.ma-bt-lg Tour guides
+          each guide in tour.guides
+            .overview-box__detail
+              img.overview-box__img(src=`img/users/${guide.photo}` alt=`${guide.photo}`)
+              - if(guide.role === 'lead-guide')
+                span.overview-box__label Lead guide
+              - if(guide.role === 'guide')
+                span.overview-box__label Tour guide
+              span.overview-box__text= guide.name
+  
+    .description-box
+      h2.heading-secondary.ma-bt-lg= `Deskripsi ${tour.name} tour`
+      p.description__text= tour.description
+      p.description__text= tour.summary
+  section.section-pictures
+    each img, i in tour.images
+      .picture-box
+        img.picture-box__img.picture-box__img--1(src=`/img/tours/${img}` alt=`Gunung Bromo Tour ${i + 1}`, class=`picture-box__img--${i + 1}`)
+
+  section.section-reviews
+    .reviews
+      each review in tour.reviews
+        +reviewCard(review)
+  section.section-cta
+    .cta
+      .cta__img.cta__img--logo
+        img(src='/img/logo-single.png' alt='Flux logo')
+      img.cta__img.cta__img--1(src='/img/tours/tour-1-2.jpg' alt='')
+      img.cta__img.cta__img--2(src='/img/tours/tour-1-1.jpg' alt='')
+      .cta__content
+        h2.heading-secondary Tunggu apalagi?
+        p.cta__text= `Buat pengalaman ${tour.duration} hari tak terlupakan bersama kami!`
+        button.btn.btn--blue.span-all-rows Booking sekarang!
