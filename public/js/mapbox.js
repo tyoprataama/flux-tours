@@ -1,4 +1,21 @@
 /* eslint-disable */
+let isOpen = false;
+
+function toggleMenu() {
+  const userNav = document.getElementById('userNav');
+  const loginButton = document.getElementById('loginButton');
+  const signupButton = document.getElementById('signupButton');
+
+  if (!isOpen) {
+    userNav.style.display = 'flex'; // Display the user navigation when the menu is open
+  } else {
+    userNav.style.display = 'none'; // Hide the user navigation when the menu is closed
+  }
+
+  isOpen = !isOpen;
+}
+
+
 const locations = JSON.parse(document.getElementById('map').dataset.locations);
 console.log(locations);
 

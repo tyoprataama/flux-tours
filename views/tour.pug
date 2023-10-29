@@ -69,12 +69,12 @@ block content
       each review in tour.reviews
         +reviewCard(review)
   section.section-cta
-    .cta
-      .cta__img.cta__img--logo
+    #cta-cont.cta
+      #cta-log1.cta__img.cta__img--logo
         img(src='/img/logo-single.png' alt='Flux logo')
-      img.cta__img.cta__img--1(src='/img/tours/tour-1-2.jpg' alt='')
-      img.cta__img.cta__img--2(src='/img/tours/tour-1-1.jpg' alt='')
-      .cta__content
+      img#cta-log2.cta__img.cta__img--1(src='/img/tours/tour-1-2.jpg' alt='')
+      img#cta-log3.cta__img.cta__img--2(src='/img/tours/tour-1-1.jpg' alt='')
+      #cta-cont.cta__content
         h2.heading-secondary Tunggu apalagi?
         p.cta__text= `Buat pengalaman ${tour.duration} hari tak terlupakan bersama kami!`
         button.btn.btn--blue.span-all-rows Booking sekarang!
