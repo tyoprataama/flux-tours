@@ -1,16 +1,17 @@
 doctype html
 head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  link(rel='preconnect' href='https://fonts.googleapis.com')
-  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
-  link(rel='shortcut icon' type='image/png' href='/img/logo-single.png')
-  link(href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
-  link(rel='stylesheet' href='/css/style.css')
   block head
-  title Fluxtours | #{title}
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+    link(rel='shortcut icon' type='image/png' href='/img/logo-single.png')
+    link(href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap' rel='stylesheet')
+    link(rel='stylesheet' href='/css/style.css')
+    title Fluxtours | #{title}
 body 
   include _header
   block content 
     h1 Main content
   include _footer
+  script(src='/js/mapbox.js')
