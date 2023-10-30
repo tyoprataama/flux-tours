@@ -90,6 +90,28 @@ exports.verifyRoutes = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    const decode = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_KEY
+    );
+
+    const currentUser = await User.findById(decode.id);
+    if (!currentUser) {
+      return next();
+    }
+    //  CHECK IF USER CHANGE THE PASSWORD THEN RETURN ERROR
+    if (currentUser.changedPasswordAfter(decode.iat)) {
+      return next();
+    }
+    res.locals.user = currentUser;
+    //  GRANT USER TO THE PROTECTED ROUTES
+    return next();
+  }
+  next();
+});
+
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
@@ -107,7 +129,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('User email not found!'), 404);
   }
   const resetToken = user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false });
+  await user.save({
+    validateBeforeSave: false
+  });
   const resetURL = `${req.protocol}://${req.get('host')}
     /api/v1/users/${resetToken}`;
   const message = `
@@ -147,7 +171,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({
     //  Find the user based on token and with valid token not expired
     passwordResetToken: hashedToken,
-    passwordResetExp: { $gt: Date.now() } // To check if the token still valid
+    passwordResetExp: {
+      $gt: Date.now()
+    } // To check if the token still valid
   });
   if (!user) {
     return next(new AppError('Invalid token or expired!'), 400);

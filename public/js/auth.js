@@ -1,6 +1,5 @@
 /*eslint-disable*/
 const login = async (email, password) => {
-  console.log(email, password);
   try {
     const res = await axios({
       method: 'POST',
@@ -10,13 +9,17 @@ const login = async (email, password) => {
         password
       }
     })
-    console.log(res);
+    if (res.data.status === 'success') {
+      alert('Login success!')
+      window.setTimeout(() => {
+        location.assign('/')
+      }, 50)
+    }
   } catch (err) {
-    console.log(err.response.data);
+    alert(err.response.data.message);
   }
 }
 const signup = async (name, email, password, passwordConfirm) => {
-  console.log(name, email, password, passwordConfirm);
   try {
     const res = await axios({
       method: 'POST',
@@ -28,9 +31,8 @@ const signup = async (name, email, password, passwordConfirm) => {
         passwordConfirm
       }
     })
-    console.log(res);
   } catch (err) {
-    console.log(err.response.data);
+    alert(err.response.data.message);
   }
 }
 // Wrap your event listeners in a function and call it after the DOM is loaded
