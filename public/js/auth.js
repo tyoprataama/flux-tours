@@ -31,6 +31,12 @@ const signup = async (name, email, password, passwordConfirm) => {
         passwordConfirm
       }
     })
+    if (res.data.status === 'success') {
+      alert('Signup success!')
+      window.setTimeout(() => {
+        location.assign('/')
+      }, 50)
+    }
   } catch (err) {
     alert(err.response.data.message);
   }
