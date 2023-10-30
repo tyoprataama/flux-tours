@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -42,6 +43,7 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+app.use(cookieParser());
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -66,6 +68,7 @@ app.use(
 app.use(express.json());
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
   next();
 });
 
