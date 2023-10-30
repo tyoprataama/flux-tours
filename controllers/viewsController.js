@@ -1,4 +1,5 @@
 const Tour = require('../models/tourModel');
+const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -10,7 +11,9 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   });
 });
 exports.getTour = async (req, res, next) => {
-  const tour = await Tour.findOne({ slug: req.params.slug }).populate({
+  const tour = await Tour.findOne({
+    slug: req.params.slug
+  }).populate({
     path: 'reviews',
     fields: 'review rating user'
   });
@@ -32,4 +35,25 @@ exports.getSignupForm = (req, res) => {
   res.status(200).render('signup', {
     title: 'Please sign upto your account'
   });
+};
+
+exports.postNewUser = async (req, res) => {
+  try {
+    const { name, email, password, confirmPassword } = req.body;
+
+    const newUser = new User({
+      name,
+      email,
+      password,
+      confirmPassword
+    });
+
+    await newUser.save();
+
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({
+      error: err.message
+    });
+  }
 };

@@ -8,4 +8,5 @@ router.get('/', viewsController.getOverview);
 router.get('/tour/:slug', authController.verifyRoutes, viewsController.getTour);
 router.get('/login', viewsController.getLoginForm);
 router.get('/signup', viewsController.getSignupForm);
+router.post('/signup', viewsController.postNewUser);
 module.exports = router;
