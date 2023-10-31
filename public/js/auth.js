@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import axios from 'axios';
 const login = async (email, password) => {
   try {
     const res = await axios({
