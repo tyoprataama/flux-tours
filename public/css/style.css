@@ -278,6 +278,7 @@ body {
   padding: 1.6rem 15rem;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 20px 20px;
 }
 
 .alert--success {

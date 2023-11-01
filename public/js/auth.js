@@ -10,13 +10,13 @@ const login = async (email, password) => {
       }
     })
     if (res.data.status === 'success') {
-      alert('Login success!')
+      showAlert('success', 'Login success!')
       window.setTimeout(() => {
         location.assign('/')
       }, 50)
     }
   } catch (err) {
-    alert(err.response.data.message);
+    showAlert('error', err.response.data.message);
   }
 }
 const signup = async (name, email, password, passwordConfirm) => {
@@ -32,13 +32,13 @@ const signup = async (name, email, password, passwordConfirm) => {
       }
     })
     if (res.data.status === 'success') {
-      alert('Signup success!')
+      showAlert('success', 'Signup success!')
       window.setTimeout(() => {
         location.assign('/')
       }, 50)
     }
   } catch (err) {
-    alert(err.response.data.message);
+    showAlert('error', err.response.data.message);
   }
 }
 // Wrap your event listeners in a function and call it after the DOM is loaded
