@@ -41,10 +41,28 @@ const signup = async (name, email, password, passwordConfirm) => {
     showAlert('error', err.response.data.message);
   }
 }
+
+const logout = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: 'http://localhost:3000/api/v1/users/logout',
+    })
+    if (res.data.status === 'success') {
+      showAlert('success', 'Loging out!')
+      window.setTimeout(() => {
+        location.reload(true)
+      }, 50)
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+}
 // Wrap your event listeners in a function and call it after the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form');
   const formSignup = document.querySelector('.form-signup');
+  const btnLogout = document.querySelector('.nav__el--logout');
 
   if (form) {
     form.addEventListener('submit', e => {
@@ -65,4 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
       signup(name, email, password, passwordConfirm);
     });
   }
+  
+  if (btnLogout) btnLogout.addEventListener('click', logout)
 });
