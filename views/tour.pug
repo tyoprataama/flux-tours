@@ -65,6 +65,7 @@ block content
     #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
   section.section-reviews
+    h2.review-head#headrev Slide for more reviews 👉
     .reviews
       each review in tour.reviews
         +reviewCard(review)
