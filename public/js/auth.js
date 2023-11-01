@@ -13,7 +13,7 @@ const login = async (email, password) => {
       showAlert('success', 'Login success!')
       window.setTimeout(() => {
         location.assign('/')
-      }, 50)
+      }, 500)
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -35,7 +35,7 @@ const signup = async (name, email, password, passwordConfirm) => {
       showAlert('success', 'Signup success!')
       window.setTimeout(() => {
         location.assign('/')
-      }, 50)
+      }, 500)
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -52,7 +52,7 @@ const logout = async () => {
       showAlert('success', 'Loging out!')
       window.setTimeout(() => {
         location.reload(true)
-      }, 50)
+      }, 500)
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
