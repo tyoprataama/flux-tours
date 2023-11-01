@@ -98,27 +98,31 @@ exports.verifyRoutes = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    const decode = await promisify(jwt.verify)(
-      req.cookies.jwt,
-      process.env.JWT_KEY
-    );
+exports.isLoggedIn = async (req, res, next) => {
+  try {
+    if (req.cookies.jwt) {
+      const decode = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_KEY
+      );
 
-    const currentUser = await User.findById(decode.id);
-    if (!currentUser) {
+      const currentUser = await User.findById(decode.id);
+      if (!currentUser) {
+        return next();
+      }
+      //  CHECK IF USER CHANGE THE PASSWORD THEN RETURN ERROR
+      if (currentUser.changedPasswordAfter(decode.iat)) {
+        return next();
+      }
+      res.locals.user = currentUser;
+      //  GRANT USER TO THE PROTECTED ROUTES
       return next();
     }
-    //  CHECK IF USER CHANGE THE PASSWORD THEN RETURN ERROR
-    if (currentUser.changedPasswordAfter(decode.iat)) {
-      return next();
-    }
-    res.locals.user = currentUser;
-    //  GRANT USER TO THE PROTECTED ROUTES
+  } catch (err) {
     return next();
   }
   next();
-});
+};
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
