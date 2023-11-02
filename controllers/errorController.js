@@ -26,36 +26,60 @@ const handleJwtExpired = err =>
     401
   );
 
-const devError = (err, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    error: err,
-    stack: err.stack
+const devError = (err, req, res) => {
+  //  Render error in API
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+      error: err,
+      stack: err.stack
+    });
+  }
+  //  Render error in Development
+  console.log('ERROR 😮‍💨', err);
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong!',
+    msg: err.message,
+    status: err.statusCode
   });
 };
 
-const prodError = (err, res) => {
-  //  SEND ERR MESSAGE TO CLIENT
-  if (err.isOperational) {
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: err.message
-    });
-    //  SEND UNKNOWN ERR PREVENT LEAK ERR
-  } else {
-    console.log('ERROR 😤', err);
-    res.status(500).json({
+const productionError = (err, req, res) => {
+  //  Render error in API
+  if (req.originalUrl.startsWith('/api')) {
+    if (err.isOperational) {
+      return res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
+      });
+    }
+    console.log('ERROR 😮‍💨', err);
+    return res.status(500).json({
       status: 'error',
       message: 'Something wrong!'
     });
   }
+  //  Render error in Production
+  if (err.isOperational) {
+    console.log('ERRROR 😮‍💨', err);
+    return res.status(err.statusCode).render('error', {
+      title: 'Something went wrong!',
+      msg: err.message,
+      status: err.statusCode
+    });
+  }
+  console.log('ERRROR 😮‍💨', err);
+  return res.status(err.statusCode).render('error', {
+    title: 'Something went wrong!',
+    msg: 'Please try again later.'
+  });
 };
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
   if (process.env.NODE_ENV === 'development') {
-    devError(err, res);
+    devError(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
     let error = Object.create(err);
     if (error.name === 'CastError') error = handleCastErrDB(error);
@@ -65,6 +89,6 @@ module.exports = (err, req, res, next) => {
     if (error.message === 'jwt malformed') error = handleJwtExpired(error);
     if (error.name === 'ValidationError')
       error = handleValidationErrorDB(error);
-    prodError(error, res);
+    productionError(error, req, res);
   }
 };
