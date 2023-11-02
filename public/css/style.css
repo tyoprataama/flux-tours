@@ -65,6 +65,22 @@ body {
     font-size: 15px;
   }
 
+  #userv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #userc {
+    padding: 0 2rem;
+    align-items: center;
+  }
+
+  #formphoto {
+    height: 5rem;
+    width: 5rem;
+    margin-right: 1rem;
+  }
+
   #loglog,
   #loglog2 {
     font-size: 10px;
@@ -190,7 +206,7 @@ body {
 
   .form__input,
   .form__label {
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 10px;
   }
 }
@@ -432,7 +448,7 @@ body {
 .btn-small,
 .btn-small:link,
 .btn-small:visited {
-  background-color: #55c57a;
+  background-color: #457e9b;
   color: #fff;
   font-size: 1.4rem;
   padding: 1.25rem 3rem;
@@ -448,22 +464,23 @@ body {
 }
 
 .btn-small:hover {
-  background-color: #7dd56f;
+  background-color: #457e9b;
 }
 
 .btn-text:link,
 .btn-text:visited {
-  color: #55c57a;
+  color: #457e9b;
   display: inline-block;
   text-decoration: none;
-  border-bottom: 1px solid #55c57a;
-  padding: 3px;
+  border-bottom: 1px solid #457e9b;
+  padding: 3px 5px;
+  border-radius: 10px;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
 .btn-text:hover {
-  background-color: #55c57a;
+  background-color: #457e9b;
   color: #fff;
   -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
@@ -955,7 +972,7 @@ body {
   max-width: 120rem;
   margin: 0 auto;
   min-height: 100vh;
-  border-radius: 3px;
+  border-radius: 30px;
   overflow: hidden;
   -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
   box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
@@ -971,9 +988,9 @@ body {
   background-image: -webkit-gradient(linear,
       left top,
       right bottom,
-      from(#7dd56f),
-      to(#28b487));
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+      from(#457e9b),
+      to(#1d2433));
+  background-image: linear-gradient(to right bottom, #457e9b, #1d2433);
   padding: 4rem 0;
 }
 
@@ -1455,7 +1472,7 @@ body {
   border-bottom: 3px solid transparent;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border-radius: 1s0px;
+  border-radius: 20px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   /* Pseudo element (a visible thing that isn't really in the DOM).

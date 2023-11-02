@@ -37,6 +37,12 @@ exports.getSignupForm = (req, res) => {
   });
 };
 
+exports.getAccount = (req, res) => {
+  res.status(200).render('account', {
+    title: 'Akun'
+  });
+};
+
 exports.postNewUser = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;

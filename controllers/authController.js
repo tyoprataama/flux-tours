@@ -94,6 +94,7 @@ exports.verifyRoutes = catchAsync(async (req, res, next) => {
     );
   }
   req.user = currentUser;
+  res.locals.user = currentUser;
   //  GRANT USER TO THE PROTECTED ROUTES
   next();
 });
