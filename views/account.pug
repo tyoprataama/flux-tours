@@ -34,7 +34,7 @@ block content
           //- form.form.form-user-data(action='/submit-user-data' method='POST')
           
           //- WITH API
-          form.form.form-user-data
+          form.form.form-user-data(action= '/update-data-user', method= 'POST')
             .form__group
               label.form__label(for='name') Nama
               input#name.form__input(type='text', value=`${user.name}`, required, name='name')
@@ -59,7 +59,7 @@ block content
               label.form__label(for='password') Password baru
               input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
             .form__group.ma-bt-lg
-              label.form__label(for='password-confirm') Konfirmasi Password
+              label.form__label(for='password-confirm') Konfirmasi password baru
               input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
             .form__group.right
               button.btn.btn--small.btn--blue.btn--save-password Simpan password

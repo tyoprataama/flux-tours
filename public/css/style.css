@@ -1481,11 +1481,13 @@ body {
 
 .form__input:focus {
   outline: none;
-  border-bottom: 3px solid #55c57a;
+  border-radius: 20px;
+  border-bottom: 3px solid #457e9b;
 }
 
 .form__input:focus:invalid {
   border-bottom: 3px solid #ff7730;
+  border-radius: 20px;
 }
 
 .form__input::-webkit-input-placeholder {
@@ -1530,15 +1532,15 @@ body {
 }
 
 .form__upload:focus+label {
-  outline: 3px solid #55c57a;
+  outline: 3px solid #457e9b;
   outline-offset: 3px;
 }
 
 .form__upload+label {
-  color: #55c57a;
+  color: #457e9b;
   display: inline-block;
   text-decoration: none;
-  border-bottom: 1px solid #55c57a;
+  border-bottom: 1px solid #457e9b;
   padding: 3px;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
@@ -1546,7 +1548,7 @@ body {
 }
 
 .form__upload+label:hover {
-  background-color: #55c57a;
+  background-color: #457e9b;
   color: #fff;
   -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);

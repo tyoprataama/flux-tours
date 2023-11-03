@@ -10,4 +10,5 @@ router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.post('/signup', authController.isLoggedIn, viewsController.postNewUser);
 router.get('/account', authController.verifyRoutes, viewsController.getAccount);
+router.post('/update-data-user', viewsController.updateDataUser);
 module.exports = router;

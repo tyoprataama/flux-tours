@@ -43,6 +43,9 @@ exports.getAccount = (req, res) => {
   });
 };
 
+exports.updateDataUser = (req, res, next) => {
+  console.log(req.body);
+};
 exports.postNewUser = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
