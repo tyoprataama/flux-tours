@@ -51,11 +51,32 @@ const logout = async () => {
     if (res.data.status === 'success') {
       showAlert('success', 'Loging out!')
       window.setTimeout(() => {
-        location.reload(true)
+        location.assign('/')
       }, 500)
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+  }
+}
+
+const updateUser = async (name, email) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: 'http://localhost:3000/api/v1/users/updateMe',
+      data: {
+        name,
+        email
+      }
+    })
+    if (res.data.status === 'success') {
+      showAlert('success', 'Data Updated!')
+      window.setTimeout(() => {
+        location.assign('/me')
+      }, 500)
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message)
   }
 }
 // Wrap your event listeners in a function and call it after the DOM is loaded
@@ -63,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form--login');
   const formSignup = document.querySelector('.form-signup');
   const btnLogout = document.querySelector('.nav__el--logout');
+  const updateDataUser = document.querySelector('.form-user-data');
 
   if (form) {
     form.addEventListener('submit', e => {
@@ -85,4 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (btnLogout) btnLogout.addEventListener('click', logout)
+  if (updateDataUser) {
+    updateDataUser.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      updateUser(name, email);
+    })
+  }
 });
