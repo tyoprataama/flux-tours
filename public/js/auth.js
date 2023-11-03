@@ -59,21 +59,20 @@ const logout = async () => {
   }
 }
 
-const updateUser = async (name, email) => {
+const updateUser = async (data, type) => {
   try {
+    const url = type === 'password' ? 'http://localhost:3000/api/v1/users/changePassword' : 'http://localhost:3000/api/v1/users/updateMe'
     const res = await axios({
       method: 'PATCH',
-      url: 'http://localhost:3000/api/v1/users/updateMe',
-      data: {
-        name,
-        email
-      }
+      url,
+      data
     })
     if (res.data.status === 'success') {
-      showAlert('success', 'Data Updated!')
+      showAlert('success', `${type.toUpperCase()} UPDATED!`)
       window.setTimeout(() => {
         location.assign('/me')
-      }, 500)
+      }, 1000)
+      
     }
   } catch (err) {
     showAlert('error', err.response.data.message)
@@ -85,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formSignup = document.querySelector('.form-signup');
   const btnLogout = document.querySelector('.nav__el--logout');
   const updateDataUser = document.querySelector('.form-user-data');
+  const updatePasswordUser = document.querySelector('.form-user-password');
 
   if (form) {
     form.addEventListener('submit', e => {
@@ -110,9 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (updateDataUser) {
     updateDataUser.addEventListener('submit', e => {
       e.preventDefault();
+      document.querySelector('#savesettings').textContent = 'Updating...'
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
-      updateUser(name, email);
+      updateUser({name, email}, 'data');
+    })
+  }
+  if (updatePasswordUser) {
+    updatePasswordUser.addEventListener('submit', e => {
+      e.preventDefault();
+      document.querySelector('#btnpass').textContent = 'Updating...'
+      const currPassword = document.getElementById('password-current').value;
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('password-confirm').value;
+      updateUser({currPassword, password, passwordConfirm}, 'password');
     })
   }
 });

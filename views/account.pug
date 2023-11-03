@@ -45,7 +45,7 @@ block content
               img.form__user-photo#formphoto(src=`/img/users/${user.photo}`, alt='User photo')
               a.btn-text(href='') Pilih foto baru
             .form__group.right
-              button.btn.btn--small.btn--blue Simpan pengaturan
+              button.btn.btn--small.btn--blue#savesettings Simpan pengaturan
               
         .line &nbsp;
         
@@ -62,4 +62,4 @@ block content
               label.form__label(for='password-confirm') Konfirmasi password baru
               input#password-confirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
             .form__group.right
-              button.btn.btn--small.btn--blue.btn--save-password Simpan password
+              button.btn.btn--small.btn--blue.btn--save-password#btnpass Simpan password

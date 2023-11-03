@@ -88,7 +88,7 @@ userSchema.methods.changedPasswordAfter = function(JWTTimeStamps) {
   //  CHECK IF USER HAVE PasswordChangeAt then
   if (this.passwordChangedAt) {
     const timeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10); // PARSEINT THE DATE AND DEVIDE TO 100 TO MAKE IT EQUAL FROM JWTTimeStamps FORMAT
-    console.log(timeStamp, JWTTimeStamps);
+
     //  RETURN THE CHANGE PASSWORD DATE IS GREATER THAN JWT DATE
     return JWTTimeStamps < timeStamp;
   }
@@ -101,7 +101,7 @@ userSchema.methods.createPasswordResetToken = function() {
     .createHash('sha256') //  encrypt token using hash based on sha 256 algorithm
     .update(resetToken)
     .digest('hex');
-  console.log({ resetToken }, this.passwordResetToken);
+
   this.passwordResetExp = Date.now() + 10 * 60 * 1000; // Set the token valid until 10 minutes
   return resetToken;
 };
