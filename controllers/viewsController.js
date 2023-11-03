@@ -43,9 +43,23 @@ exports.getAccount = (req, res) => {
   });
 };
 
-exports.updateDataUser = (req, res, next) => {
-  console.log('UPDATED: ', req.body);
-};
+exports.updateDataUser = catchAsync(async (req, res, next) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      name: req.body.name,
+      email: req.body.email
+    },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+  res.status(200).render('account', {
+    title: 'Akun',
+    user: updatedUser
+  });
+});
 exports.postNewUser = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
