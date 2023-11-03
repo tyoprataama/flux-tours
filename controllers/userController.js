@@ -4,6 +4,17 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factoryController = require('./factoryController');
 
+//  The file display when updating image
+// {
+//   fieldname: 'photo',
+//   originalname: 'original.jpeg',
+//   encoding: '7bit',
+//   mimetype: 'image/jpeg',
+//   destination: 'public/img/users',
+//   filename: 'user-65403866586ac974a5f88db7-1699023989429.jpeg',
+//   path: 'public/img/users/user-65403866586ac974a5f88db7-1699023989429.jpeg',
+//   size: 5310371
+// }
 const multerStorage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, 'public/img/users');
@@ -27,7 +38,7 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter
 });
-exports.uploadImg = upload.single('photo');
+
 const filterdObj = (body, ...fields) => {
   const newObj = {};
   Object.keys(body).forEach(el => {
@@ -35,6 +46,8 @@ const filterdObj = (body, ...fields) => {
   });
   return newObj;
 };
+
+exports.uploadImg = upload.single('photo');
 
 exports.checkUserUpdate = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
@@ -50,8 +63,8 @@ exports.getMe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
+  // console.log(req.body);
+  // console.log(req.file);
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -63,7 +76,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterdObj(req.body, 'name', 'email');
-
+  if (req.file) filteredBody.photo = req.file.filename; //  Look into file info above
   // 3) Update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
