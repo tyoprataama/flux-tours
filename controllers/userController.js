@@ -1,10 +1,33 @@
+const multer = require('multer');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factoryController = require('./factoryController');
 
-//  Create an object that includes in fields such like email, name from user body
-//  This prevent user to update their role into restricted field such like role admin
+const multerStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'public/img/users');
+  },
+  filename: function(req, file, cb) {
+    // Because mimetype: 'image/jpeg', we only want to take the extensions value
+    const extensiosnName = file.mimetype.split('/')[1];
+    //  Set the file name: user-user.id-date.extensions
+    cb(null, `user-${req.user.id}-${Date.now()}.${extensiosnName}`);
+  }
+});
+//  Only upload image file
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Please choose an image!', 400), false);
+  }
+};
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+});
+exports.uploadImg = upload.single('photo');
 const filterdObj = (body, ...fields) => {
   const newObj = {};
   Object.keys(body).forEach(el => {
@@ -27,7 +50,8 @@ exports.getMe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  // 1) Create error if user POSTs password data
+  console.log(req.body);
+  console.log(req.file);
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError(
