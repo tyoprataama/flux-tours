@@ -60,7 +60,7 @@ const logout = async () => {
 }
 // Wrap your event listeners in a function and call it after the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.form');
+  const form = document.querySelector('.form--login');
   const formSignup = document.querySelector('.form-signup');
   const btnLogout = document.querySelector('.nav__el--logout');
 
@@ -83,6 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
       signup(name, email, password, passwordConfirm);
     });
   }
-  
+
   if (btnLogout) btnLogout.addEventListener('click', logout)
 });
