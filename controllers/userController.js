@@ -43,6 +43,8 @@ const upload = multer({
   fileFilter: multerFilter
 });
 
+exports.uploadImg = upload.single('photo');
+
 const filterdObj = (body, ...fields) => {
   const newObj = {};
   Object.keys(body).forEach(el => {
@@ -66,8 +68,6 @@ exports.resizeImg = (req, res, next) => {
     .toFile(`public/img/users/${req.file.filename}`);
   next();
 };
-
-exports.uploadImg = upload.single('photo');
 
 exports.checkUserUpdate = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {

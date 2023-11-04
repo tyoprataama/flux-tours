@@ -72,7 +72,7 @@ const updateUser = async (data, type) => {
       window.setTimeout(() => {
         location.assign('/me')
       }, 1000)
-      
+
     }
   } catch (err) {
     showAlert('error', err.response.data.message)
@@ -110,10 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (updateDataUser) {
     updateDataUser.addEventListener('submit', e => {
       e.preventDefault();
+      const formUser = new FormData();
       document.querySelector('#savesettings').textContent = 'Updating...'
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      updateUser({name, email}, 'data');
+      formUser.append('name', document.getElementById('name').value)
+      formUser.append('email', document.getElementById('email').value)
+      formUser.append('photo', document.getElementById('photo').files[0])
+      console.log(formUser);
+      updateUser(formUser, 'data');
     })
   }
   if (updatePasswordUser) {
@@ -123,7 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const currPassword = document.getElementById('password-current').value;
       const password = document.getElementById('password').value;
       const passwordConfirm = document.getElementById('password-confirm').value;
-      updateUser({currPassword, password, passwordConfirm}, 'password');
+      updateUser({
+        currPassword,
+        password,
+        passwordConfirm
+      }, 'password');
     })
   }
 });
