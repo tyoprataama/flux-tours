@@ -12,7 +12,12 @@ router.route('/resetPassword/:token').patch(authController.resetPassword);
 //  Only verify user can access the route after this line
 router.use(authController.verifyRoutes);
 router.patch('/changePassword', authController.updatePassword);
-router.patch('/updateMe', userController.uploadImg, userController.updateMe);
+router.patch(
+  '/updateMe',
+  userController.uploadImg,
+  userController.resizeImg,
+  userController.updateMe
+);
 router.delete('/deleteMe', userController.deleteMe);
 router.get('/me', userController.getMe, userController.getUser);
 

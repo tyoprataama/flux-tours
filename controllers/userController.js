@@ -1,4 +1,5 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
@@ -15,17 +16,20 @@ const factoryController = require('./factoryController');
 //   path: 'public/img/users/user-65403866586ac974a5f88db7-1699023989429.jpeg',
 //   size: 5310371
 // }
-const multerStorage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'public/img/users');
-  },
-  filename: function(req, file, cb) {
-    // Because mimetype: 'image/jpeg', we only want to take the extensions value
-    const extensiosnName = file.mimetype.split('/')[1];
-    //  Set the file name: user-user.id-date.extensions
-    cb(null, `user-${req.user.id}-${Date.now()}.${extensiosnName}`);
-  }
-});
+// const multerStorage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'public/img/users');
+//   },
+//   filename: function(req, file, cb) {
+//     // Because mimetype: 'image/jpeg', we only want to take the extensions value
+//     const extensiosnName = file.mimetype.split('/')[1];
+//     //  Set the file name: user-user.id-date.extensions
+//     cb(null, `user-${req.user.id}-${Date.now()}.${extensiosnName}`);
+//   }
+// });
+
+const multerStorage = multer.memoryStorage();
+
 //  Only upload image file
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -45,6 +49,22 @@ const filterdObj = (body, ...fields) => {
     if (fields.includes(el)) newObj[el] = body[el];
   });
   return newObj;
+};
+
+exports.resizeImg = (req, res, next) => {
+  if (!req.file) return next();
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+  sharp(req.file.buffer)
+    .resize({
+      width: 500,
+      height: 500,
+      fit: sharp.fit.cover,
+      position: sharp.strategy.entropy
+    })
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/users/${req.file.filename}`);
+  next();
 };
 
 exports.uploadImg = upload.single('photo');
