@@ -54,6 +54,8 @@ router
   .patch(
     authController.verifyRoutes,
     authController.restrictTo('admin', 'lead-guide'),
+    tourController.uploadImg,
+    tourController.resizeImg,
     tourController.updateTour
   )
   .delete(
