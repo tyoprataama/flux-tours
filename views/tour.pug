@@ -65,10 +65,13 @@ block content
     #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
   section.section-reviews
-    h2.review-head#headrev Geser untuk melihat review 👉
-    .reviews
-      each review in tour.reviews
-        +reviewCard(review)
+    - if (tour.reviews.length === 0)
+      h2.review-head#headrev 👉 Tour ini belum memiliki review 👈
+    - else
+      h2.review-head#headrev Geser untuk melihat review 👉
+      .reviews
+        each review in tour.reviews
+          +reviewCard(review)
   section.section-cta
     #cta-cont.cta
       #cta-log1.cta__img.cta__img--logo
