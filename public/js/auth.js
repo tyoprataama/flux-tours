@@ -68,7 +68,9 @@ const updateUser = async (data, type) => {
       data
     })
     if (res.data.status === 'success') {
+      const btnUpdate = type === 'password' ? '#btnpass':'#savesettings';
       showAlert('success', `${type.toUpperCase()} UPDATED!`)
+      document.querySelector(btnUpdate).textContent = 'Updating...'
       window.setTimeout(() => {
         location.assign('/me')
       }, 1000)
@@ -111,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDataUser.addEventListener('submit', e => {
       e.preventDefault();
       const formUser = new FormData();
-      document.querySelector('#savesettings').textContent = 'Updating...'
       formUser.append('name', document.getElementById('name').value)
       formUser.append('email', document.getElementById('email').value)
       formUser.append('photo', document.getElementById('photo').files[0])
@@ -122,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (updatePasswordUser) {
     updatePasswordUser.addEventListener('submit', e => {
       e.preventDefault();
-      document.querySelector('#btnpass').textContent = 'Updating...'
       const currPassword = document.getElementById('password-current').value;
       const password = document.getElementById('password').value;
       const passwordConfirm = document.getElementById('password-confirm').value;
