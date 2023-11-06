@@ -57,9 +57,17 @@ block content
       p.description__text= tour.description
       p.description__text= tour.summary
   section.section-pictures
-    each img, i in tour.images
+    - if (tour.images.length == 0)
       .picture-box
-        img.picture-box__img.picture-box__img--1(src=`/img/tours/${img}` alt=`${tour.name} ${i + 1}`, class=`picture-box__img--${i + 1}`)
+        img.picture-box__img.picture-box__img--1(src=`/img/tours/tour-default.jpg` alt='tour-default', class='picture-box__img--1')
+      .picture-box
+        img.picture-box__img.picture-box__img--1(src=`/img/tours/tour-default.jpg` alt='tour-default', class='picture-box__img--2')
+      .picture-box
+        img.picture-box__img.picture-box__img--1(src=`/img/tours/tour-default.jpg` alt='tour-default', class='picture-box__img--3')
+    - else if (tour.images.length > 1)
+      each img, i in tour.images
+        .picture-box
+          img.picture-box__img.picture-box__img--1(src=`/img/tours/${img}` alt=`${tour.name} ${i + 1}`, class=`picture-box__img--${i + 1}`)
   
   section.section-map
     #map(data-locations=`${JSON.stringify(tour.locations)}`)
