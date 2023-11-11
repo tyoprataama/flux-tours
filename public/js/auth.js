@@ -38,7 +38,7 @@ const signup = async (name, email, password, passwordConfirm) => {
       }, 500)
     }
   } catch (err) {
-    showAlert('error', err.response.data.message);
+    console.log(err);
   }
 }
 
@@ -68,7 +68,7 @@ const updateUser = async (data, type) => {
       data
     })
     if (res.data.status === 'success') {
-      const btnUpdate = type === 'password' ? '#btnpass':'#savesettings';
+      const btnUpdate = type === 'password' ? '#btnpass' : '#savesettings';
       showAlert('success', `${type.toUpperCase()} UPDATED!`)
       document.querySelector(btnUpdate).textContent = 'Updating...'
       window.setTimeout(() => {
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (formSignup) {
     formSignup.addEventListener('submit', e => {
       e.preventDefault();
+      document.getElementById('btnsignup').textContent = 'Creating...'
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;

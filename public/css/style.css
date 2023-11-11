@@ -497,7 +497,7 @@ body {
 
 .btn-text:focus {
   outline: none;
-  outline: 3px solid #55c57a;
+  outline: 3px solid #457e9b;
   outline-offset: 3px;
 }
 

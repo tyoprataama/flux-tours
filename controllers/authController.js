@@ -4,7 +4,7 @@ const { promisify } = require('util');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const sendMsg = require('../utils/mail');
+const SendMailer = require('../utils/mail');
 
 //  CREATE SIGNTOKEN VARIABLE AND PASS PARAMETER ID
 const signToken = id =>
@@ -39,6 +39,9 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role
   });
+  const url = `${req.protocol}://${req.get('host')}/`;
+  console.log(url);
+  await new SendMailer(newUser, url).sendWelcome();
   resStatus(newUser, 201, res);
 });
 
@@ -151,11 +154,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   Hi ${user.name} (${user.email}). 
   You sent a request for updated your account password on Flux Tours. Please click link below to updated your password \n ${resetURL} \n This link is active for only 10 minutes. \n If you don't want to change your password, ignore this mail!`;
   try {
-    await sendMsg({
-      email: user.email,
-      subject: 'Update password Flux Tours',
-      message
-    });
+    // await sendMsg({
+    //   email: user.email,
+    //   subject: 'Update password Flux Tours',
+    //   message
+    // });
     res.status(200).json({
       status: 'success',
       message: 'Token sent to email'
