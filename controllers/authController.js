@@ -150,9 +150,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   });
   const resetURL = `${req.protocol}://${req.get('host')}
     /api/v1/users/${resetToken}`;
-  const message = `
-  Hi ${user.name} (${user.email}). 
-  You sent a request for updated your account password on Flux Tours. Please click link below to updated your password \n ${resetURL} \n This link is active for only 10 minutes. \n If you don't want to change your password, ignore this mail!`;
+  await new SendMailer(user, resetURL).sendResetPassword();
+  // const message = `
+  // Hi ${user.name} (${user.email}).
+  // You sent a request for updated your account password on Flux Tours. Please click link below to updated your password \n ${resetURL} \n This link is active for only 10 minutes. \n If you don't want to change your password, ignore this mail!`;
   try {
     // await sendMsg({
     //   email: user.email,

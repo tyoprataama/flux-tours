@@ -43,4 +43,8 @@ module.exports = class SendMailer {
   async sendWelcome() {
     await this.send('welcome', `Selamat bergabung di Fluxtours`);
   }
+
+  async sendResetPassword() {
+    await this.send('resetPassword', 'Konfirmasi Password Anda');
+  }
 };
