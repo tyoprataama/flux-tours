@@ -14,6 +14,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandling = require('./controllers/errorController');
 const tourRoutes = require('./routes/toursRoutes');
 const userRoutes = require('./routes/userRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const viewsRoutes = require('./routes/viewsRoutes');
 
@@ -77,6 +78,7 @@ app.use('/', viewsRoutes);
 app.use('/api/v1/tours', tourRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
+app.use('/api/v1/bookings', bookingRoutes);
 //  ERROR HANDLINGS MIDDLEWARE
 app.all('*', (req, res, next) => {
   const error = new AppError(

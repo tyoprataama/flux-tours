@@ -7,12 +7,18 @@ module.exports = class SendMailer {
     this.to = user.email;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
-    this.from = `Flux Tours <${process.env.EMAIL_FROM}>`;
+    this.from = process.env.EMAIL_FROM;
   }
 
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      return 'production';
+      return nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASS
+        }
+      });
     }
     return nodemailer.createTransport({
       host: process.env.MAIL_HOST,
