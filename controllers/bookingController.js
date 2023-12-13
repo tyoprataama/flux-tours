@@ -50,11 +50,9 @@ exports.bookingSessions = catchAsync(async (req, res, next) => {
     .then(transaction => {
       // transaction token
       const transactionToken = transaction.token;
-      console.log('transactionToken:', transactionToken);
 
       // transaction redirect url
       const transactionRedirectUrl = transaction.redirect_url;
-      console.log('transactionRedirectUrl:', transactionRedirectUrl);
 
       res.status(200).json({
         status: 'success',

@@ -80,6 +80,23 @@ const updateUser = async (data, type) => {
     showAlert('error', err.response.data.message)
   }
 }
+
+function payWithMidtrans(transactionToken) {
+  snap.pay(transactionToken, {
+    onSuccess: function (result) {
+      console.log('Payment success:', result);
+      // Tambahkan logika atau redirect ke halaman sukses
+    },
+    onPending: function (result) {
+      console.log('Payment pending:', result);
+      // Tambahkan logika atau redirect ke halaman yang sesuai
+    },
+    onError: function (result) {
+      console.error('Payment error:', result);
+      // Tambahkan logika atau redirect ke halaman error
+    }
+  });
+}
 // Wrap your event listeners in a function and call it after the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form--login');
@@ -87,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnLogout = document.querySelector('.nav__el--logout');
   const updateDataUser = document.querySelector('.form-user-data');
   const updatePasswordUser = document.querySelector('.form-user-password');
+  const bookBtn = document.getElementById('book-tour');
 
   if (form) {
     form.addEventListener('submit', e => {
@@ -133,5 +151,20 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordConfirm
       }, 'password');
     })
+  }
+
+  if (bookBtn) {
+    bookBtn.addEventListener('click', function () {
+      const originalButtonText = document.getElementById('book-tour').textContent;
+      document.getElementById('book-tour').textContent = 'Memproses ...'
+      const tourId = this.getAttribute('data-tour-id');
+      axios.get(`/api/v1/bookings/checkout-session/${tourId}`)
+        .then(response => {
+          const data = response.data;
+          payWithMidtrans(data.transactionToken);
+        })
+        .catch(error => console.error('Error:', error));
+      document.getElementById('book-tour').textContent = originalButtonText;
+    });
   }
 });
