@@ -1,14 +1,17 @@
 const midtransClient = require('midtrans-client');
 const { nanoid } = require('nanoid');
 const Tour = require('../models/tourModel');
-const User = require('../models/userModel');
+const Booking = require('../models/bookingModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
 exports.bookingSessions = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.tourId);
-  //  Generate last tour name for order id
   const tourName = tour.name;
+  const tourId = tour.id;
+  const user = req.user.id;
+  const tourPrice = tour.price;
+  //  Generate last tour name for order id
   const orderName = tourName.includes(' ')
     ? tourName
         .split(' ')
@@ -24,15 +27,15 @@ exports.bookingSessions = catchAsync(async (req, res, next) => {
 
   const parameter = {
     transaction_details: {
-      order_id: `FLUX-${nanoid(8)}-${orderName}`,
-      gross_amount: tour.price
+      order_id: `FLUX-${tourId}-${nanoid(8)}`,
+      gross_amount: tourPrice
     },
     items_details: [
       {
-        id: tour.id,
+        id: tourId,
         name: `${tour.name} Tour`,
         quantity: 1,
-        price: tour.price
+        price: tourPrice
       }
     ],
     customer_details: {
@@ -43,22 +46,31 @@ exports.bookingSessions = catchAsync(async (req, res, next) => {
     enabled_payments: ['credit_card', 'bni_va', 'bca_va', 'other_va', 'gopay'],
     credit_card: {
       secure: true
-    }
+    },
+    custom_field1: tourId,
+    custom_field2: user,
+    custom_field3: tourPrice
   };
   snap
     .createTransaction(parameter)
-    .then(transaction => {
+    .then(async transaction => {
       // transaction token
       const transactionToken = transaction.token;
 
       // transaction redirect url
       const transactionRedirectUrl = transaction.redirect_url;
+      const booking = await Booking.create({
+        tour: tourId,
+        user: user,
+        price: tourPrice
+      });
 
       res.status(200).json({
         status: 'success',
         transactionToken,
         transactionRedirectUrl,
-        parameter
+        parameter,
+        booking
       });
     })
     .catch(e => {
@@ -68,4 +80,28 @@ exports.bookingSessions = catchAsync(async (req, res, next) => {
       });
       console.log('Error occured:', e.message);
     });
+});
+
+exports.confirmPayment = catchAsync(async (req, res, next) => {
+  const { bookingId } = req.params;
+  const updatePaid = await Booking.findByIdAndUpdate(
+    bookingId,
+    {
+      paid: 'success'
+    },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+  if (!updatePaid) {
+    return next(new AppError('Booking tidak ditemukan!', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      booking: updatePaid
+    }
+  });
 });

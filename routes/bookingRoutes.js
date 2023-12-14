@@ -8,5 +8,10 @@ router.get(
   authController.verifyRoutes,
   bookingController.bookingSessions
 );
+router.patch(
+  '/confirm-payment/:bookingId',
+  authController.verifyRoutes,
+  bookingController.confirmPayment
+);
 
 module.exports = router;
