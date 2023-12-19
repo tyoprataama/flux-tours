@@ -5,11 +5,21 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.get('/', authController.isLoggedIn, viewsController.getOverview);
+router.get(
+  '/my-booking',
+  authController.verifyRoutes,
+  viewsController.getBooking
+);
 router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour);
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', authController.isLoggedIn, viewsController.getSignupForm);
 router.post('/signup', authController.isLoggedIn, viewsController.postNewUser);
 router.get('/me', authController.verifyRoutes, viewsController.getAccount);
+router.patch(
+  '/confirm-payment/:bookingId',
+  authController.verifyRoutes,
+  viewsController.getConfirmPayment
+);
 router.patch(
   '/updateMe',
   authController.verifyRoutes,

@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -52,6 +53,8 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xssClean());
 
+app.use(cors());
+
 // Prevent parameter pollution
 app.use(
   hpp({
@@ -73,6 +76,15 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  // Set header HTTP yang diperlukan
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Lanjutkan ke middleware berikutnya
+  next();
+});
 // Routes
 app.use('/', viewsRoutes);
 app.use('/api/v1/tours', tourRoutes);

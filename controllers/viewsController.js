@@ -1,5 +1,8 @@
+/*eslint-disable*/
+const moment = require('moment');
 const Tour = require('../models/tourModel');
 const User = require('../models/userModel');
+const Booking = require('../models/bookingModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -10,6 +13,52 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     tours
   });
 });
+
+exports.getBooking = catchAsync(async (req, res, next) => {
+  if (!req.user || !req.user.id) {
+    return next(new AppError('User not authenticated.', 500));
+  }
+
+  const bookings = await Booking.find({
+    user: req.user.id
+  });
+
+  const formattedBookings = await Promise.all(bookings.map(async (booking) => {
+    const tour = await Tour.findById(booking.tour); 
+    const nearestStartDate = tour.getNearestStartDate();
+    return {
+      ...booking._doc,
+      nearestStartDate: moment(nearestStartDate).locale('id').format('DD/MM/YYYY HH:mm') + 'WIB',
+      formattedDate: moment(booking.createdAt).locale('id').format('DD/MM/YYYY HH:mm') + 'WIB'
+    };
+  }));
+  res.status(200).render('booking', {
+    title: 'My Booking',
+    bookings: formattedBookings,
+  });
+});
+
+exports.getConfirmPayment = catchAsync(async (req, res, next) => {
+  const { bookingId } = req.params.bookingId;
+  const updatedBooking = await Booking.findByIdAndUpdate(
+    bookingId,
+    {
+      paid: 'success'
+    },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+  if (!updatedBooking) {
+    return next(new AppError('Booking tidak ditemukan!', 404));
+  }
+  res.status(200).render('confirmPay', {
+    title: 'Confirm Payment',
+    booking: updatedBooking
+  });
+});
+
 exports.getTour = async (req, res, next) => {
   const tour = await Tour.findOne({
     slug: req.params.slug

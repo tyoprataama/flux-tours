@@ -11,7 +11,20 @@ head
       const clientKey = '#{process.env.MIDTRANS_CLIENT_KEY}';
     script(type='text/javascript' src='https://app.sandbox.midtrans.com/snap/snap.js' data-client-key=clientKey)
     script.
-      console.log(clientKey)
+      const formatDateTime = (dateTime) => {
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName: 'short',
+      };
+      return new Date(dateTime).toLocaleString('id-ID', options);
+      };
+
     link(rel='stylesheet' href='/css/style.css')
     title Fluxtours | #{title}
 body 

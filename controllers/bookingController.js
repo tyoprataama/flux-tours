@@ -83,7 +83,7 @@ exports.bookingSessions = catchAsync(async (req, res, next) => {
 });
 
 exports.confirmPayment = catchAsync(async (req, res, next) => {
-  const { bookingId } = req.params;
+  const { bookingId } = req.params.bookingId;
   const updatePaid = await Booking.findByIdAndUpdate(
     bookingId,
     {

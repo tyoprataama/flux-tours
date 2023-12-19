@@ -128,6 +128,13 @@ tourSchema.pre('save', function(next) {
   next();
 });
 
+tourSchema.methods.getNearestStartDate = function() {
+  const sortedDates = this.startDates
+    .slice()
+    .sort((a, b) => a.getTime() - b.getTime());
+  return sortedDates[2];
+};
+
 tourSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'guides',

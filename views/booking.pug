@@ -1,0 +1,48 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+  li(class=`${active ? 'side-nav--active' : ''}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`img/icon.svg#icon-${icon}`)
+      | #{text}
+
+block content
+  main.main
+    .user-view#userv
+      nav.user-view__menu
+        ul.side-nav
+          +navItem('/me', 'Pengaturan', 'settings')
+          +navItem('/my-booking', 'Bookings', 'briefcase', true)
+          +navItem('#', 'Reviews', 'star')
+          +navItem('#', 'Billing', 'credit-card')
+
+      .user-view__content#usercontent
+        .user-view__form-container#userc
+          h2.heading-secondary.ma-bt-md Riwayat Booking 
+            - if (!bookings || bookings.length < 1)
+              form.form.form-user-data
+                .form__group
+                  p.no-booking ~ Belum ada booking
+            - else if (bookings || bookings.length > 1)
+              table.no-bookin
+                thead
+                  tr
+                    th Tanggal Booking
+                    th Nama Tour
+                    th Status
+                    th Harga
+                    th Jadwal Keberangkatan
+                    th Tour Guide
+                tbody
+                  each booking in bookings
+                    tr
+                      td= booking.formattedDate
+                      td= booking.tour.name
+                      td
+                        span(class=booking.paid == 'success' ? 'paid-success' : 'paid-pending')= booking.paid
+                      td= `Rp.${booking.price}`
+                      td= booking.nearestStartDate
+                      td= booking.tour.guides[0].name
+                        //- button
+                        //-   a.btn.btn--small.btn--blue(href=`/confirm-payment/${booking._id}`)#book-btn Sync

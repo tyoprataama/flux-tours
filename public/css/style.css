@@ -373,6 +373,51 @@ body {
   margin: 0 auto;
 }
 
+.no-booking {
+  margin-top: 50px;
+  font-size: 15px;
+  color: #777;
+}
+
+.no-bookin {
+  margin-top: 50px;
+  font-size: 10px;
+  color: #fff;
+  align-items: center;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+td {
+  color: #717171;
+}
+
+th {
+  background-color: #457e9b;
+}
+
+.paid-success {
+  background-color: #9ADE7B;
+  padding: 5px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.paid-pending {
+  background-color: #FFC436;
+  padding: 5px;
+  color: #fff;
+  border-radius: 5px;
+}
+
 .heading-tertirary {
   font-size: 2.75rem;
   text-align: right;
