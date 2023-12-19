@@ -3,7 +3,7 @@ const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/v1/users/signin',
+      url: '/api/v1/users/signin',
       data: {
         email,
         password
@@ -23,7 +23,7 @@ const signup = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/v1/users/signup',
+      url: '/api/v1/users/signup',
       data: {
         name,
         email,
@@ -46,7 +46,7 @@ const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'http://localhost:3000/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     })
     if (res.data.status === 'success') {
       showAlert('success', 'Loging out!')
@@ -61,7 +61,7 @@ const logout = async () => {
 
 const updateUser = async (data, type) => {
   try {
-    const url = type === 'password' ? 'http://localhost:3000/api/v1/users/changePassword' : 'http://localhost:3000/api/v1/users/updateMe'
+    const url = type === 'password' ? '/api/v1/users/changePassword' : '/api/v1/users/updateMe'
     const res = await axios({
       method: 'PATCH',
       url,
