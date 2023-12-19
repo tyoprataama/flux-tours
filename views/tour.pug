@@ -35,7 +35,7 @@ block content
       div
         .overview-box__group
           h2.heading-secondary.ma-bt-lg Tentang tour
-          -const date = tour.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
+          -const date = tour.startDates[2].toLocaleString('en-us', {month: 'long', year: 'numeric'})
           .card__data
           +overviewBox('calendar', 'Keberangkatan', date)
           +overviewBox('trending-up', 'Level', tour.difficulty)
